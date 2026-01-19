@@ -1,7 +1,7 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Admin Panel",
+  title: "Visavasa Website ",
   description: "Admin Login System",
 };
 

@@ -3,6 +3,9 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
+import { FaFacebookF, FaInfinity, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+
 
 export default function UserHome() {
   const router = useRouter();
@@ -136,7 +139,13 @@ export default function UserHome() {
 
 
       </section>
-      {/* IN THE SPOTLIGHT */}
+
+
+
+
+              {/* IN THE SPOTLIGHT */}
+    
+      
       <section className="mt-[80px] px-[113px]">
 
         {/* Heading */}
@@ -196,7 +205,10 @@ export default function UserHome() {
       </section>
 
 
-      {/* CONSTRUCTIONS CONTRACT */}
+
+
+
+                     {/* CONSTRUCTIONS CONTRACT */}
       <section className="mt-[100px] px-[113px]">
 
         {/* Header */}
@@ -317,7 +329,11 @@ export default function UserHome() {
 
         </div>
       </section>
-      {/* NEW & NOTEWORTHY SECTION */}
+
+
+                 {/* NEW & NOTEWORTHY SECTION */}
+
+      
       <section className="mt-[100px] px-[113px]">
 
         {/* Header */}
@@ -391,7 +407,10 @@ export default function UserHome() {
       </section>
 
 
-      {/* Popular services */}
+                 {/* Popular services */}
+
+
+
       <section className="mt-[100px] px-[113px]">
 
         {/* Header */}
@@ -517,7 +536,11 @@ export default function UserHome() {
 
       </div>
 
-      {/* our contractor */}
+
+
+                 {/* our contractor */}
+
+
 
       <section className="mt-[100px] px-[113px]">
 
@@ -597,7 +620,10 @@ export default function UserHome() {
       </section>
 
 
-      {/* Clean Essentials */}
+                 {/* Clean Essentials */}
+
+
+
       <section className="mt-[100px] px-[113px]">
         <div className="flex justify-between items-start mb-[40px]">
           <div>
@@ -717,7 +743,10 @@ export default function UserHome() {
       </div>
 
 
-       {/* Appliance Service & Repair*/}
+              {/* Appliance Service & Repair*/}
+
+
+
         <section className="mt-[100px] px-[113px]">
 
         {/* Header */}
@@ -791,7 +820,7 @@ export default function UserHome() {
       </section>
 
 
-      {/* Home Repair & installation  */}
+              {/* Home Repair & installation  */}
 
 
        <section className="mt-[100px] px-[113px]">
@@ -867,8 +896,319 @@ export default function UserHome() {
       </section>
 
 
+ <section className="w-full py-6">
+  <div
+    className="
+      mx-auto
+      bg-black
+      border border-blue-500
+      w-[1350px]
+      h-[229px]
+      flex
+      flex-col
+      justify-center
+    "
+  >
+    <p className="text-center text-[11px] text-gray-300 mb-4">
+      Trusted & verified brand in use.
+    </p>
+
+    <div className="flex items-center justify-center gap-[102px]">
+      <Image src="/images/RR.svg" alt="RR" width={120} height={40} />
+      <Image src="/images/path.svg" alt="Philips" width={260} height={40} />
+      <Image src="/images/h.svg" alt="Havells" width={260} height={40} />
+      <Image src="/images/p.svg" alt="Panasonic" width={280} height={40} />
+    </div>
+  </div>
+</section>
 
 
+{/* pet  */}
+
+
+ <section className="mt-[100px] px-[113px]">
+
+        {/* Header */}
+        <div className="flex justify-between items-center mb-[40px]">
+          <h2 className="text-[38px] font-semibold text-[#2f2f2f]">
+            Pet & Feeding 
+          </h2>
+
+          <button className="text-[14px] text-blue-600 border border-blue-600 rounded-full px-[14px] py-[4px]">
+            See all
+          </button>
+        </div>
+
+        {/* Cards Wrapper */}
+        <div className="relative">
+
+          <div className="flex gap-[88px]">
+
+            {/* CARD */}
+            {[
+              "Grommer",
+              "Host and sitter",
+              "Dog Walker",
+              "Jet spray installation",
+              "Decor Installation",
+            ].map((title, index) => (
+              <div key={index} className="w-[300.58px] text-center">
+
+                {/* Image Card */}
+                <div className="h-[348px] bg-[#f2f2f2] rounded-[19px] flex items-center justify-center">
+                  <img
+                    src="/images/same.png"
+                    alt={title}
+                    className="h-[260px] object-contain"
+                  />
+                </div>
+
+                {/* Text */}
+                <h4 className="mt-[16px] font-medium text-[16px]">
+                  {title}
+                </h4>
+
+                <p className="text-[13px] text-gray-500 mt-[4px]">
+                  ★ 4.79 (4.1K)
+                </p>
+
+                <p className="text-[13px] text-gray-700 mt-[2px] font-medium">
+                  ₹898
+                </p>
+
+              </div>
+            ))}
+
+          </div>
+
+          {/* Right Arrow */}
+          <button
+            className="
+        absolute -right-[40px] top-[140px]
+        w-[44px] h-[44px]
+        rounded-full bg-white
+        shadow-[0_8px_20px_rgba(0,0,0,0.15)]
+        flex items-center justify-center
+        text-[20px]
+      "
+          >
+            →
+          </button>
+
+        </div>
+      </section>
+
+
+
+      <section className="w-full bg-white">
+  <div className="mx-auto max-w-[1440px] px-6 py-20 grid grid-cols-1 md:grid-cols-2 items-center ">
+    {/* Left Content */}
+    <div className="ml-22">
+      <h1 className="text-4xl md:text-5xl font-semibold text-gray-900 leading-tight mb-6">
+        Give your space the <br /> glow-up it deserves
+      </h1>
+
+      <p className="text-gray-500 max-w-md mb-8">
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry
+      </p>
+
+      <button className="inline-flex items-center justify-center rounded-full bg-gray-100 px-8 py-3 text-sm font-medium text-gray-700 hover:bg-gray-200 transition">
+        Reach Out Now
+      </button>
+    </div>
+
+    {/* Right Image */}
+    <div className="flex justify-center md:justify-end">
+      <Image
+        src="/images/petfood.png"
+        alt="Product"
+        width={1100}
+        height={680}
+        className="object-contain"
+        priority
+      />
+    </div>
+  </div>
+</section>
+
+
+                {/* pet breeds*/}
+
+
+ <section className="mt-[100px] px-[113px]">
+
+        {/* Header */}
+        <div className="flex justify-between items-center mb-[40px]">
+          <h2 className="text-[38px] font-semibold text-[#2f2f2f]">
+            Pet & Feeding 
+          </h2>
+
+          <button className="text-[14px] text-blue-600 border border-blue-600 rounded-full px-[14px] py-[4px]">
+            See all
+          </button>
+        </div>
+
+        {/* Cards Wrapper */}
+        <div className="relative">
+
+          <div className="flex gap-[88px]">
+
+            {/* CARD */}
+            {[
+              "Lebrador  ",
+              "Retrievers",
+              "German Shepherds ",
+              "Golden Retrievers",
+              "Pugs",
+            ].map((title, index) => (
+              <div key={index} className="w-[300.58px] text-center">
+
+                {/* Image Card */}
+                <div className="h-[348px] bg-[#f2f2f2] rounded-[19px] flex items-center justify-center">
+                  <img
+                    src="/images/same.png"
+                    alt={title}
+                    className="h-[260px] object-contain"
+                  />
+                </div>
+
+                {/* Text */}
+                <h4 className="mt-[16px] font-medium text-[16px]">
+                  {title}
+                </h4>
+
+                <p className="text-[13px] text-gray-500 mt-[4px]">
+                  ★ 4.79 (4.1K)
+                </p>
+
+                <p className="text-[13px] text-gray-700 mt-[2px] font-medium">
+                  ₹25000
+                </p>
+
+              </div>
+            ))}
+
+          </div>
+
+          {/* Right Arrow */}
+          <button
+            className="
+        absolute -right-[40px] top-[140px]
+        w-[44px] h-[44px]
+        rounded-full bg-white
+        shadow-[0_8px_20px_rgba(0,0,0,0.15)]
+        flex items-center justify-center
+        text-[20px]
+      "
+          >
+            →
+          </button>
+
+        </div>
+      </section>
+
+
+
+      <section className="w-full py-12">
+  <div className="mx-auto max-w-[1300px] border-2 border-blue-500 bg-[#cddcff] rounded-sm">
+    <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-12 px-12 py-10">
+      
+      {/* Left Content */}
+      <div>
+        <h1 className="text-4xl md:text-5xl font-medium text-black leading-tight mb-6">
+          Give your space the <br /> glow-up it deserves
+        </h1>
+
+        <p className="text-sm text-gray-700 max-w-md">
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry
+        </p>
+      </div>
+
+      {/* Right Image Box */}
+      <div className=" p-6 rounded-sm flex items-center justify-center h-[400px]">
+        <Image
+          src="/images/civil.jpg"
+          alt="Construction"
+          width={720}
+          height={460}
+          className="object-contain max-h-full"
+        />
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+ <footer className="w-full bg-white">
+      {/* Top Footer */}
+      <div className="mx-auto max-w-[1500px] px-12 py-16 grid grid-cols-1 md:grid-cols-4 gap-12">
+        {/* Company */}
+        <div>
+          <h4 className="font-semibold text-black mb-4">Company</h4>
+          <ul className="space-y-2 text-sm text-gray-700">
+            <li>About The Company</li>
+            <li>Build Career With Us</li>
+            <li>Resources</li>
+            <li>Case Studies</li>
+            <li>Portfolio</li>
+            <li>Contact Us</li>
+          </ul>
+        </div>
+
+                   {/* Services */}
+        
+        <div>
+          <h4 className="font-semibold text-black mb-4">Services</h4>
+          <ul className="space-y-2 text-sm text-gray-700">
+            <li>Local Contractor</li>
+            <li>Door to Door Services</li>
+            <li>Pet Foods</li>
+            <li>Smart Locker</li>
+            <li>Installation & uninstallation</li>
+            <li>Support Services</li>
+          </ul>
+        </div>
+
+        {/* Professionals */}
+        <div>
+          <h4 className="font-semibold text-black mb-4">For professionals</h4>
+          <ul className="space-y-2 text-sm text-gray-700">
+            <li>Register as professional</li>
+          </ul>
+        </div>
+
+        {/* Social */}
+        <div>
+          <h4 className="font-semibold text-black mb-4">Social links</h4>
+
+          <div className="flex items-center gap-3 mb-6">
+            <span className="w-8 h-8 flex items-center justify-center rounded-full bg-black text-white text-sm"><FaFacebookF /></span>
+            <span className="w-8 h-8 flex items-center justify-center rounded-full bg-black text-white text-sm"><FaInfinity /></span>
+            <span className="w-8 h-8 flex items-center justify-center rounded-full bg-black text-white text-sm"><FaInstagram /></span>
+            <span className="w-8 h-8 flex items-center justify-center rounded-full bg-black text-white text-sm"><FaLinkedinIn /></span>
+          </div>
+
+          <div className="space-y-3">
+            <Image src="/images/appstore.png" alt="App Store" width={150} height={45} />
+            <Image src="/images/playstore.png" alt="Play Store" width={150} height={45} />
+          </div>
+        </div>
+      </div>
+
+      {/* Middle Links */}
+      <div className="text-center text-sm text-gray-700 mb-6 space-x-6">
+        <span>Terms of Use</span>
+        <span>Privacy</span>
+        <span>Terms & Conditions</span>
+      </div>
+
+      {/* Bottom Bar */}
+      <div className="bg-[#0c1633] text-white text-center text-sm py-4 rounded-t-4xl">
+        Copyright © 2025 Visvashome Pvt. Ltd. All rights reserved.
+      </div>
+    </footer>
 
 
 
