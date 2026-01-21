@@ -59,83 +59,143 @@ export default function UserHome() {
       </div>
 
       {/* HERO SECTION */}
-      <section className="flex justify-between items-center px-[113px] pt-[60px]">
+      <section className="flex justify-between px-[113px] pt-[60px]">
 
-        {/* LEFT */}
+        {/* LEFT SIDE */}
         <div className="max-w-[520px]">
-          <h1 className="text-[40px] font-semibold leading-[1.2] text-[#2f2f2f]">
-            Contractor & Home <br />
-            Services At Your Door Step
+
+          <h1 className="text-[34px] font-semibold text-[#2f2f2f] leading-[1.3]">
+            On-Demand Contractors & Home Services
           </h1>
 
-          <p className="mt-4 text-[14px] leading-[1.6] text-gray-500">
-            From concept to code, we craft feature-rich Android applications
-            with unmatched performance and premium functionality. As a
-            trusted Android app development company.
-          </p>
+          {/* WHAT WE NEED CARD */}
+          <div className="mt-2 border border-gray-300 rounded-[18px] p-6 w-[420px]">
+            <h3 className="text-[20px] font-semibold mb-6">
+              What We Need ?
+            </h3>
+
+            <div className="grid grid-cols-3 gap-y-6 gap-x-4 text-center">
+              {[
+                {
+                  icon: "/icon/electrician.png",
+                  label: "Electrician, Plumber & Carpenter",
+                },
+                {
+                  icon: "/icon/repair.png",
+                  label: "Appliance Repair",
+                },
+                {
+                  icon: "/icon/cleaning.png",
+                  label: "Cleaning",
+                },
+                {
+                  icon: "/icon/gardener1.png",
+                  label: "Gardener",
+                },
+                {
+                  icon: "/icon/Vodgri.png",
+                  label: "Vodgi",
+                },
+                {
+                  icon: "/icon/painting.png",
+                  label: "Painting & waterproofing",
+                },
+                {
+                  icon: "/icon/gardener.png",
+                  label: "Gardener",
+                },
+                {
+                  icon: "/icon/labour.png",
+                  label: "Labour",
+                },
+                {
+                  icon: "/icon/contractors.png",
+                  label: "Contractors",
+                },
+              ].map((item, i) => (
+                <div
+                  key={i}
+                  className="
+        flex flex-col items-center gap-2
+        transition-transform duration-300
+        hover:-translate-y-1
+      "
+                >
+                  <img
+                    src={item.icon}
+                    alt={item.label}
+                    className="w-[44px] h-[44px] object-contain"
+                  />
+
+                  <p className="text-[12px] text-gray-600 leading-tight text-center">
+                    {item.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+          </div>
 
           {/* STATS */}
-          <div className="flex gap-[48px] mt-[150px]">
+          <div className="flex gap-[60px] mt-[60px]">
             <div>
-              <h2 className="text-[38px] font-semibold  text-[#2f2f2f]">15+</h2>
-              <span className="text-[15px] text-gray-500">
-                Years Of Excellence
-              </span>
+              <h2 className="text-[32px] font-semibold">15+</h2>
+              <p className="text-[14px] text-gray-500">Years Of Excellence</p>
             </div>
 
             <div>
-              <h2 className="text-[38px] font-semibold text-[#2f2f2f]">4.5</h2>
-              <span className="text-[15px] text-gray-500">
-                Services Rating
-              </span>
+              <h2 className="text-[32px] font-semibold">4.5</h2>
+              <p className="text-[14px] text-gray-500">Services Rating</p>
             </div>
 
             <div>
-              <h2 className="text-[38px] font-semibold text-[#2f2f2f]">12k</h2>
-              <span className="text-[15px] text-gray-500">
-                Family In Jaipur
-              </span>
+              <h2 className="text-[32px] font-semibold">12k</h2>
+              <p className="text-[14px] text-gray-500">Family In Jaipur</p>
             </div>
           </div>
         </div>
 
-        {/* RIGHT */}
-        {/* RIGHT BACKGROUND EFFECT */}
-        <div className="absolute right-[0] top-[140px] w-[700px] h-[600px] pointer-events-none">
+        {/* RIGHT SIDE IMAGE COLLAGE */}
+        <div className="relative w-[720px] h-[620px] grid grid-cols-2 grid-rows-[1fr_1fr_1fr] gap-4">
 
-          {/* SOFT GRADIENT GLOW */}
-          <div
-            className="
-      absolute inset-0
-      bg-[linear-gradient(104.93deg,rgba(36,0,255,0.35)_-7.3%,rgba(235,115,6,0.45)_92.24%)]
-      blur-[180px]
-      opacity-80
-    "
-          />
+          {/* LEFT TOP */}
+          <div className="overflow-hidden rounded-2xl group">
+            <img
+              src="/images/slider.png"
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              alt=""
+            />
+          </div>
 
-          {/* TOP BALL */}
-          <div
-            className="
-      absolute top-[40px] left-[120px]
-      w-[96px] h-[96px]
-      rounded-full
-      bg-[radial-gradient(circle_at_30%_30%,#5c5c5c,#000)]
-      shadow-[0_30px_60px_rgba(0,0,0,0.35)]
-    "
-          />
+          {/* RIGHT TALL (2 rows) */}
+          <div className="overflow-hidden rounded-2xl group row-span-2">
+            <img
+              src="/images/home2.png"
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              alt=""
+            />
+          </div>
 
-          {/* BOTTOM BALL */}
-          <div
-            className="
-      absolute bottom-[120px] right-[140px]
-      w-[72px] h-[72px]
-      rounded-full
-      bg-[radial-gradient(circle_at_30%_30%,#444,#000)]
-      shadow-[0_24px_48px_rgba(0,0,0,0.35)]
-    "
-          />
+          {/* LEFT BOTTOM (EQUAL HEIGHT) */}
+          <div className="overflow-hidden rounded-2xl group row-span-2">
+            <img
+              src="/images/home3.png"
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              alt=""
+            />
+          </div>
+
+          {/* RIGHT BOTTOM */}
+          <div className="overflow-hidden rounded-2xl group col-start-2 row-start-3">
+            <img
+              src="/images/home4.png"
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              alt=""
+            />
+          </div>
 
         </div>
+
 
 
       </section>
@@ -143,54 +203,64 @@ export default function UserHome() {
 
 
 
-              {/* IN THE SPOTLIGHT */}
-    
-      
-      <section className="mt-[80px] px-[113px]">
+      {/* IN THE SPOTLIGHT */}
 
+
+      <section className="mt-[80px] px-[113px]">
         {/* Heading */}
         <h2 className="text-[28px] font-semibold text-[#2f2f2f] mb-[24px]">
-          In the Spotlight
+          In the spotlight
         </h2>
 
         {/* Slider */}
         <div className="relative">
-
           <div className="flex gap-[24px] overflow-hidden">
-
             {/* Slide 1 */}
-            <div className="min-w-[474px] h-[322px] rounded-[16px] overflow-hidden">
+            <div className="group min-w-[400px] h-[250px] rounded-[16px] overflow-hidden cursor-pointer">
               <img
                 src="/images/slider.png"
                 alt="Spotlight 1"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
               />
             </div>
 
             {/* Slide 2 */}
-            <div className="min-w-[474px] h-[322px] rounded-[16px] overflow-hidden">
+            <div className="group min-w-[400px] h-[250px] rounded-[16px] overflow-hidden cursor-pointer">
               <img
                 src="/images/slider1.png"
                 alt="Spotlight 2"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
               />
             </div>
 
             {/* Slide 3 */}
-            <div className="min-w-[474px] h-[322px] rounded-[16px] overflow-hidden">
+            <div className="group min-w-[400px] h-[250px] rounded-[16px] overflow-hidden cursor-pointer">
               <img
                 src="/images/slider.png"
                 alt="Spotlight 3"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
               />
             </div>
-
           </div>
+
+          {/* LEFT ARROW */}
+          <button
+            className="
+        absolute left-[-22px] top-1/2 -translate-y-1/2
+        w-[44px] h-[44px]
+        rounded-full bg-white
+        shadow-[0_8px_20px_rgba(0,0,0,0.15)]
+        flex items-center justify-center
+        text-[20px]
+      "
+          >
+            ←
+          </button>
 
           {/* RIGHT ARROW */}
           <button
             className="
-        absolute right-[-20px] top-1/2 -translate-y-1/2
+        absolute right-[-22px] top-1/2 -translate-y-1/2
         w-[44px] h-[44px]
         rounded-full bg-white
         shadow-[0_8px_20px_rgba(0,0,0,0.15)]
@@ -200,7 +270,6 @@ export default function UserHome() {
           >
             →
           </button>
-
         </div>
       </section>
 
@@ -208,7 +277,8 @@ export default function UserHome() {
 
 
 
-                     {/* CONSTRUCTIONS CONTRACT */}
+
+      {/* CONSTRUCTIONS CONTRACT */}
       <section className="mt-[100px] px-[113px]">
 
         {/* Header */}
@@ -229,16 +299,17 @@ export default function UserHome() {
 
         {/* Cards */}
         <div className="relative">
-
           <div className="flex gap-[88px]">
 
-            {/* Card 1 */}
-            <div className="w-[180px] text-center">
-              <img
-                src="/images/electrician.png"
-                alt="Electrician"
-                className="mx-auto h-[260px] object-contain"
-              />
+            {/* Card */}
+            <div className="w-[180px] text-center group cursor-pointer">
+              <div className="w-[180px] h-[180px] mx-auto flex items-center justify-center overflow-hidden">
+                <img
+                  src="/images/electrician.png"
+                  alt="Electrician"
+                  className="h-full object-contain transition-transform duration-300 group-hover:scale-110"
+                />
+              </div>
               <h4 className="mt-[16px] font-medium">Electrician</h4>
               <p className="text-[13px] text-gray-500 mt-[4px]">
                 ★ 4.79 (4.1K)
@@ -248,13 +319,14 @@ export default function UserHome() {
               </p>
             </div>
 
-            {/* Card 2 */}
-            <div className="w-[180px] text-center">
-              <img
-                src="/images/carpenter.png"
-                alt="Carpenter"
-                className="mx-auto h-[260px] object-contain"
-              />
+            <div className="w-[180px] text-center group cursor-pointer">
+              <div className="w-[180px] h-[180px] mx-auto flex items-center justify-center overflow-hidden">
+                <img
+                  src="/images/carpenter.png"
+                  alt="Carpenter"
+                  className="h-full object-contain transition-transform duration-300 group-hover:scale-110"
+                />
+              </div>
               <h4 className="mt-[16px] font-medium">Carpenter</h4>
               <p className="text-[13px] text-gray-500 mt-[4px]">
                 ★ 4.79 (4.1K)
@@ -264,13 +336,14 @@ export default function UserHome() {
               </p>
             </div>
 
-            {/* Card 3 */}
-            <div className="w-[180px] text-center">
-              <img
-                src="/images/painter.png"
-                alt="Painter"
-                className="mx-auto h-[260px] object-contain"
-              />
+            <div className="w-[180px] text-center group cursor-pointer">
+              <div className="w-[180px] h-[180px] mx-auto flex items-center justify-center overflow-hidden">
+                <img
+                  src="/images/painter.png"
+                  alt="Painter"
+                  className="h-full object-contain transition-transform duration-300 group-hover:scale-110"
+                />
+              </div>
               <h4 className="mt-[16px] font-medium">Painter</h4>
               <p className="text-[13px] text-gray-500 mt-[4px]">
                 ★ 4.79 (4.1K)
@@ -280,13 +353,14 @@ export default function UserHome() {
               </p>
             </div>
 
-            {/* Card 4 */}
-            <div className="w-[180px] text-center">
-              <img
-                src="/images/construction.png"
-                alt="Construction"
-                className="mx-auto h-[260px] object-contain"
-              />
+            <div className="w-[180px] text-center group cursor-pointer">
+              <div className="w-[180px] h-[180px] mx-auto flex items-center justify-center overflow-hidden">
+                <img
+                  src="/images/construction.png"
+                  alt="Construction"
+                  className="h-full object-contain transition-transform duration-300 group-hover:scale-110"
+                />
+              </div>
               <h4 className="mt-[16px] font-medium">Construction</h4>
               <p className="text-[13px] text-gray-500 mt-[4px]">
                 ★ 4.79 (4.1K)
@@ -296,13 +370,14 @@ export default function UserHome() {
               </p>
             </div>
 
-            {/* Card 5 */}
-            <div className="w-[180px] text-center">
-              <img
-                src="/images/gardner.png"
-                alt="Gardner"
-                className="mx-auto h-[260px] object-contain"
-              />
+            <div className="w-[180px] text-center group cursor-pointer">
+              <div className="w-[180px] h-[180px] mx-auto flex items-center justify-center overflow-hidden">
+                <img
+                  src="/images/gardner.png"
+                  alt="Gardner"
+                  className="h-full object-contain transition-transform duration-300 group-hover:scale-110"
+                />
+              </div>
               <h4 className="mt-[16px] font-medium">Gardner</h4>
               <p className="text-[13px] text-gray-500 mt-[4px]">
                 ★ 4.79 (4.1K)
@@ -317,7 +392,7 @@ export default function UserHome() {
           {/* RIGHT ARROW */}
           <button
             className="
-        absolute -right-[40px] top-[120px]
+        absolute -right-[40px] top-[90px]
         w-[44px] h-[44px]
         rounded-full bg-white
         shadow-[0_8px_20px_rgba(0,0,0,0.15)]
@@ -326,14 +401,14 @@ export default function UserHome() {
           >
             →
           </button>
-
         </div>
       </section>
 
 
-                 {/* NEW & NOTEWORTHY SECTION */}
 
-      
+      {/* NEW & NOTEWORTHY SECTION */}
+
+
       <section className="mt-[100px] px-[113px]">
 
         {/* Header */}
@@ -349,10 +424,8 @@ export default function UserHome() {
 
         {/* Cards Wrapper */}
         <div className="relative">
+          <div className="flex">
 
-          <div className="flex gap-[88px]">
-
-            {/* CARD */}
             {[
               "Carpenter",
               "Electrician",
@@ -360,16 +433,20 @@ export default function UserHome() {
               "Construction",
               "Gardner",
             ].map((title, index) => (
-              <div key={index} className="w-[300.58px] text-center">
+              <div
+                key={index}
+                className="w-[280.58px] text-center group cursor-pointer"
+              >
 
-                {/* Image Card */}
-                <div className="h-[348px] bg-[#f2f2f2] rounded-[19px] flex items-center justify-center">
+                {/* Image  */}
+                <div className="w-[240px] h-[260px] mx-auto overflow-hidden rounded-[24px] bg-[#f5f5f5]">
                   <img
                     src="/images/same.png"
                     alt={title}
-                    className="h-[260px] object-contain"
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
+
 
                 {/* Text */}
                 <h4 className="mt-[16px] font-medium text-[16px]">
@@ -392,7 +469,7 @@ export default function UserHome() {
           {/* Right Arrow */}
           <button
             className="
-        absolute -right-[40px] top-[140px]
+        absolute -right-[40px] top-[120px]
         w-[44px] h-[44px]
         rounded-full bg-white
         shadow-[0_8px_20px_rgba(0,0,0,0.15)]
@@ -402,12 +479,12 @@ export default function UserHome() {
           >
             →
           </button>
-
         </div>
       </section>
 
 
-                 {/* Popular services */}
+
+      {/* Popular services */}
 
 
 
@@ -426,30 +503,32 @@ export default function UserHome() {
 
         {/* Cards Wrapper */}
         <div className="relative">
+          <div className="flex gap-2">
 
-          <div className="flex gap-[88px]">
-
-            {/* CARD */}
             {[
               "Intense Bathroom Cleaning (2 Bathrooms)",
               "Drilling & hang (wall decor)",
-              "Tap repair ",
+              "Tap repair",
               "Classic cleaning (2 Bathrooms)",
               "Geyser check-up",
             ].map((title, index) => (
-              <div key={index} className="w-[300.58px] text-center">
+              <div
+                key={index}
+                className="w-[300.58px] text-center group cursor-pointer"
+              >
 
-                {/* Image Card */}
-                <div className="h-[348px] bg-[#f2f2f2] rounded-[19px] flex items-center justify-center">
+                {/* Image */}
+                <div className="w-[260px] h-[260px] mx-auto overflow-hidden rounded-[24px] bg-[#f5f5f5]">
                   <img
                     src="/images/same1.png"
                     alt={title}
-                    className="h-[260px] object-contain"
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
 
+
                 {/* Text */}
-                <h4 className="mt-[16px] font-medium text-[16px]">
+                <h4 className="mt-[16px] font-medium text-[16px] leading-[22px]">
                   {title}
                 </h4>
 
@@ -469,7 +548,7 @@ export default function UserHome() {
           {/* Right Arrow */}
           <button
             className="
-        absolute -right-[40px] top-[140px]
+        absolute -right-[40px] top-[120px]
         w-[44px] h-[44px]
         rounded-full bg-white
         shadow-[0_8px_20px_rgba(0,0,0,0.15)]
@@ -479,9 +558,12 @@ export default function UserHome() {
           >
             →
           </button>
-
         </div>
       </section>
+
+
+
+
 
       <div className="bg-white relative">
         <div className="flex items-center justify-between px-[185px] py-24">
@@ -489,13 +571,13 @@ export default function UserHome() {
           {/* TEXT SECTION */}
           <div
             className="
-    w-[720.25px]
-    h-[198.44px]
-    font-medium
-    text-[46px]
-    leading-[57px]
-    tracking-normal
-    capitalize
+              w-[720.25px]
+             h-[198.44px]
+             font-medium
+             text-[46px]
+             leading-[57px]
+             tracking-normal
+             capitalize
   "
           >
             <h1 className="text-[42px] font-semibold leading-tight">
@@ -515,17 +597,15 @@ export default function UserHome() {
 
           {/* IMAGE SECTION */}
           <div
-            style={{
-              width: "693px",
-              height: "587px",
-            }}
+            className="w-[693px] h-[587px] overflow-hidden"
           >
             <img
               src="/images/mobile.png"
               alt="Hero Image"
-              className="w-full h-full object-contain"
+              className="w-full h-full object-contain transition-transform duration-300 ease-in-out hover:scale-105"
             />
           </div>
+
 
         </div>
 
@@ -538,7 +618,7 @@ export default function UserHome() {
 
 
 
-                 {/* our contractor */}
+      {/* our contractor */}
 
 
 
@@ -562,30 +642,32 @@ export default function UserHome() {
 
         {/* Cards Wrapper */}
         <div className="relative">
+          <div className="flex">
 
-          <div className="flex gap-[88px]">
-
-            {/* CARD */}
             {[
               "Sanjay Mittal (Electrician)",
-              " Raju bhaiya (Painter)",
+              "Raju bhaiya (Painter)",
               "Mukesh Ji (Builder)",
               "Ramu bhaiya (Gardner)",
               "Rakesh Ji (Plumber)",
             ].map((title, index) => (
-              <div key={index} className="w-[300.58px] text-center">
+              <div
+                key={index}
+                className="w-[300.58px] text-center group cursor-pointer"
+              >
 
-                {/* Image Card */}
-                <div className="h-[348px] bg-[#f2f2f2] rounded-[19px] flex items-center justify-center">
+                {/* Image  */}
+                <div className="w-[240px] h-[260px] mx-auto overflow-hidden rounded-[24px] bg-[#f5f5f5]">
                   <img
                     src="/images/same.png"
                     alt={title}
-                    className="h-[260px] object-contain"
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
 
+
                 {/* Text */}
-                <h4 className="mt-[16px] font-medium text-[16px]">
+                <h4 className="mt-[16px] font-medium text-[16px] leading-[22px]">
                   {title}
                 </h4>
 
@@ -605,7 +687,7 @@ export default function UserHome() {
           {/* Right Arrow */}
           <button
             className="
-        absolute -right-[40px] top-[140px]
+        absolute -right-[40px] top-[120px]
         w-[44px] h-[44px]
         rounded-full bg-white
         shadow-[0_8px_20px_rgba(0,0,0,0.15)]
@@ -615,12 +697,11 @@ export default function UserHome() {
           >
             →
           </button>
-
         </div>
       </section>
 
 
-                 {/* Clean Essentials */}
+      {/* Clean Essentials */}
 
 
 
@@ -642,30 +723,32 @@ export default function UserHome() {
 
         {/* Cards Wrapper */}
         <div className="relative">
+          <div className="flex">
 
-          <div className="flex gap-[88px]">
-
-            {/* CARD */}
             {[
-              "Intense cleaning(2 Bathrooms)",
-              "Cleaning cleaning (2bathrooms)",
-              "Intense (3 bathrooms)",
-              "Classic cleaning (3bathrooms)",
+              "Intense cleaning (2 Bathrooms)",
+              "Classic cleaning (2 Bathrooms)",
+              "Intense cleaning (3 Bathrooms)",
+              "Classic cleaning (3 Bathrooms)",
               "Carpet cleaning",
             ].map((title, index) => (
-              <div key={index} className="w-[300.58px] text-center">
+              <div
+                key={index}
+                className="w-[300.58px] text-center group cursor-pointer"
+              >
 
-                {/* Image Card */}
-                <div className="h-[348px] bg-[#f2f2f2] rounded-[19px] flex items-center justify-center">
+                {/* Image  */}
+                <div className="w-[240px] h-[260px] mx-auto overflow-hidden rounded-[24px] bg-[#f5f5f5]">
                   <img
                     src="/images/same.png"
                     alt={title}
-                    className="h-[260px] object-contain"
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
 
+
                 {/* Text */}
-                <h4 className="mt-[16px] font-medium text-[16px]">
+                <h4 className="mt-[16px] font-medium text-[16px] leading-[22px]">
                   {title}
                 </h4>
 
@@ -685,7 +768,7 @@ export default function UserHome() {
           {/* Right Arrow */}
           <button
             className="
-        absolute -right-[40px] top-[140px]
+        absolute -right-[40px] top-[120px]
         w-[44px] h-[44px]
         rounded-full bg-white
         shadow-[0_8px_20px_rgba(0,0,0,0.15)]
@@ -695,9 +778,10 @@ export default function UserHome() {
           >
             →
           </button>
-
         </div>
       </section>
+
+
 
       <div className="relative bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 lg:px-20 py-24 flex items-center justify-between">
@@ -743,11 +827,11 @@ export default function UserHome() {
       </div>
 
 
-              {/* Appliance Service & Repair*/}
+      {/* Appliance Service & Repair*/}
 
 
 
-        <section className="mt-[100px] px-[113px]">
+      <section className="mt-[100px] px-[113px]">
 
         {/* Header */}
         <div className="flex justify-between items-center mb-[40px]">
@@ -762,30 +846,32 @@ export default function UserHome() {
 
         {/* Cards Wrapper */}
         <div className="relative">
+          <div className="flex">
 
-          <div className="flex gap-[88px]">
-
-            {/* CARD */}
             {[
               "Auto Top load machine check-up",
               "AC Uninstallation",
-              "TV check -up",
+              "TV check-up",
               "Semi-automatic check-up",
               "Solar panel uninstallation",
             ].map((title, index) => (
-              <div key={index} className="w-[300.58px] text-center">
+              <div
+                key={index}
+                className="w-[300.58px] text-center group cursor-pointer"
+              >
 
-                {/* Image Card */}
-                <div className="h-[348px] bg-[#f2f2f2] rounded-[19px] flex items-center justify-center">
+                {/* Image  */}
+                <div className="w-[240px] h-[260px] mx-auto overflow-hidden rounded-[24px] bg-[#f5f5f5]">
                   <img
                     src="/images/same.png"
                     alt={title}
-                    className="h-[260px] object-contain"
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
 
+
                 {/* Text */}
-                <h4 className="mt-[16px] font-medium text-[16px]">
+                <h4 className="mt-[16px] font-medium text-[16px] leading-[22px]">
                   {title}
                 </h4>
 
@@ -805,7 +891,7 @@ export default function UserHome() {
           {/* Right Arrow */}
           <button
             className="
-        absolute -right-[40px] top-[140px]
+        absolute -right-[40px] top-[120px]
         w-[44px] h-[44px]
         rounded-full bg-white
         shadow-[0_8px_20px_rgba(0,0,0,0.15)]
@@ -815,15 +901,14 @@ export default function UserHome() {
           >
             →
           </button>
-
         </div>
       </section>
 
 
-              {/* Home Repair & installation  */}
+      {/* Home Repair & installation  */}
 
 
-       <section className="mt-[100px] px-[113px]">
+      <section className="mt-[100px] px-[113px]">
 
         {/* Header */}
         <div className="flex justify-between items-center mb-[40px]">
@@ -838,10 +923,8 @@ export default function UserHome() {
 
         {/* Cards Wrapper */}
         <div className="relative">
+          <div className="flex">
 
-          <div className="flex gap-[88px]">
-
-            {/* CARD */}
             {[
               "AC Repair & Installation",
               "Switch board repair & replacement",
@@ -849,19 +932,23 @@ export default function UserHome() {
               "Jet spray installation",
               "Decor Installation",
             ].map((title, index) => (
-              <div key={index} className="w-[300.58px] text-center">
+              <div
+                key={index}
+                className="w-[300.58px] text-center group cursor-pointer"
+              >
 
-                {/* Image Card */}
-                <div className="h-[348px] bg-[#f2f2f2] rounded-[19px] flex items-center justify-center">
+                {/* Image (Square + Hover) */}
+                <div className="w-[240px] h-[260px] mx-auto overflow-hidden rounded-[24px] bg-[#f5f5f5]">
                   <img
                     src="/images/repair.jpg"
                     alt={title}
-                    className="h-[260px] object-contain"
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
 
+
                 {/* Text */}
-                <h4 className="mt-[16px] font-medium text-[16px]">
+                <h4 className="mt-[16px] font-medium text-[16px] leading-[22px]">
                   {title}
                 </h4>
 
@@ -881,7 +968,7 @@ export default function UserHome() {
           {/* Right Arrow */}
           <button
             className="
-        absolute -right-[40px] top-[140px]
+        absolute -right-[40px] top-[120px]
         w-[44px] h-[44px]
         rounded-full bg-white
         shadow-[0_8px_20px_rgba(0,0,0,0.15)]
@@ -891,14 +978,14 @@ export default function UserHome() {
           >
             →
           </button>
-
         </div>
       </section>
 
 
- <section className="w-full py-6">
-  <div
-    className="
+
+      <section className="w-full py-6 mt-15">
+        <div
+          className="
       mx-auto
       bg-black
       border border-blue-500
@@ -908,30 +995,58 @@ export default function UserHome() {
       flex-col
       justify-center
     "
-  >
-    <p className="text-center text-[11px] text-gray-300 mb-4">
-      Trusted & verified brand in use.
-    </p>
+        >
+          <p className="text-center text-[11px] text-gray-300 mb-4">
+            Trusted & verified brand in use.
+          </p>
 
-    <div className="flex items-center justify-center gap-[102px]">
-      <Image src="/images/RR.svg" alt="RR" width={120} height={40} />
-      <Image src="/images/path.svg" alt="Philips" width={260} height={40} />
-      <Image src="/images/h.svg" alt="Havells" width={260} height={40} />
-      <Image src="/images/p.svg" alt="Panasonic" width={280} height={40} />
-    </div>
-  </div>
-</section>
+          <div className="flex items-center justify-center gap-[102px]">
+            <Image
+              src="/images/RR.svg"
+              alt="RR"
+              width={120}
+              height={40}
+              className="cursor-pointer transition-all duration-300 ease-in-out opacity-80 hover:opacity-100 hover:scale-110 hover:brightness-125"
+            />
+
+            <Image
+              src="/images/path.svg"
+              alt="Philips"
+              width={260}
+              height={40}
+              className="cursor-pointer transition-all duration-300 ease-in-out opacity-80 hover:opacity-100 hover:scale-105 hover:brightness-125"
+            />
+
+            <Image
+              src="/images/h.svg"
+              alt="Havells"
+              width={260}
+              height={40}
+              className="cursor-pointer transition-all duration-300 ease-in-out opacity-80 hover:opacity-100 hover:scale-105 hover:brightness-125"
+            />
+
+            <Image
+              src="/images/p.svg"
+              alt="Panasonic"
+              width={280}
+              height={40}
+              className="cursor-pointer transition-all duration-300 ease-in-out opacity-80 hover:opacity-100 hover:scale-105 hover:brightness-125"
+            />
+          </div>
+        </div>
+      </section>
 
 
-{/* pet  */}
+
+      {/* pet  */}
 
 
- <section className="mt-[100px] px-[113px]">
+      <section className="mt-[100px] px-[113px]">
 
         {/* Header */}
         <div className="flex justify-between items-center mb-[40px]">
           <h2 className="text-[38px] font-semibold text-[#2f2f2f]">
-            Pet & Feeding 
+            Pet & Feeding
           </h2>
 
           <button className="text-[14px] text-blue-600 border border-blue-600 rounded-full px-[14px] py-[4px]">
@@ -941,30 +1056,32 @@ export default function UserHome() {
 
         {/* Cards Wrapper */}
         <div className="relative">
+          <div className="flex">
 
-          <div className="flex gap-[88px]">
-
-            {/* CARD */}
             {[
-              "Grommer",
+              "Groomer",
               "Host and sitter",
               "Dog Walker",
               "Jet spray installation",
               "Decor Installation",
             ].map((title, index) => (
-              <div key={index} className="w-[300.58px] text-center">
+              <div
+                key={index}
+                className="w-[300.58px] text-center group cursor-pointer"
+              >
 
-                {/* Image Card */}
-                <div className="h-[348px] bg-[#f2f2f2] rounded-[19px] flex items-center justify-center">
+                {/* Image  */}
+                <div className="w-[240px] h-[260px] mx-auto overflow-hidden rounded-[24px] bg-[#f5f5f5]">
                   <img
                     src="/images/same.png"
                     alt={title}
-                    className="h-[260px] object-contain"
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
 
+
                 {/* Text */}
-                <h4 className="mt-[16px] font-medium text-[16px]">
+                <h4 className="mt-[16px] font-medium text-[16px] leading-[22px]">
                   {title}
                 </h4>
 
@@ -984,7 +1101,7 @@ export default function UserHome() {
           {/* Right Arrow */}
           <button
             className="
-        absolute -right-[40px] top-[140px]
+        absolute -right-[40px] top-[120px]
         w-[44px] h-[44px]
         rounded-full bg-white
         shadow-[0_8px_20px_rgba(0,0,0,0.15)]
@@ -994,53 +1111,52 @@ export default function UserHome() {
           >
             →
           </button>
-
         </div>
       </section>
 
 
 
       <section className="w-full bg-white">
-  <div className="mx-auto max-w-[1440px] px-6 py-20 grid grid-cols-1 md:grid-cols-2 items-center ">
-    {/* Left Content */}
-    <div className="ml-22">
-      <h1 className="text-4xl md:text-5xl font-semibold text-gray-900 leading-tight mb-6">
-        Give your space the <br /> glow-up it deserves
-      </h1>
+        <div className="mx-auto max-w-[1440px] px-6 py-20 grid grid-cols-1 md:grid-cols-2 items-center ">
+          {/* Left Content */}
+          <div className="ml-22">
+            <h1 className="text-4xl md:text-5xl font-semibold text-gray-900 leading-tight mb-6">
+              Give your space the <br /> glow-up it deserves
+            </h1>
 
-      <p className="text-gray-500 max-w-md mb-8">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry
-      </p>
+            <p className="text-gray-500 max-w-md mb-8">
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry
+            </p>
 
-      <button className="inline-flex items-center justify-center rounded-full bg-gray-100 px-8 py-3 text-sm font-medium text-gray-700 hover:bg-gray-200 transition">
-        Reach Out Now
-      </button>
-    </div>
+            <button className="inline-flex items-center justify-center rounded-full bg-gray-100 px-8 py-3 text-sm font-medium text-gray-700 hover:bg-gray-200 transition">
+              Reach Out Now
+            </button>
+          </div>
 
-    {/* Right Image */}
-    <div className="flex justify-center md:justify-end">
-      <Image
-        src="/images/petfood.png"
-        alt="Product"
-        width={1100}
-        height={680}
-        className="object-contain"
-        priority
-      />
-    </div>
-  </div>
-</section>
-
-
-                {/* pet breeds*/}
+          {/* Right Image */}
+          <div className="flex justify-center md:justify-end">
+            <Image
+              src="/images/petfood.png"
+              alt="Product"
+              width={1100}
+              height={680}
+              className="object-contain"
+              priority
+            />
+          </div>
+        </div>
+      </section>
 
 
- <section className="mt-[100px] px-[113px]">
+      {/* pet breeds*/}
+
+
+      <section className="mt-[100px] px-[113px]">
 
         {/* Header */}
         <div className="flex justify-between items-center mb-[40px]">
           <h2 className="text-[38px] font-semibold text-[#2f2f2f]">
-            Pet & Feeding 
+            Pet & Feeding
           </h2>
 
           <button className="text-[14px] text-blue-600 border border-blue-600 rounded-full px-[14px] py-[4px]">
@@ -1050,30 +1166,32 @@ export default function UserHome() {
 
         {/* Cards Wrapper */}
         <div className="relative">
+          <div className="flex">
 
-          <div className="flex gap-[88px]">
-
-            {/* CARD */}
             {[
-              "Lebrador  ",
+              "Labrador",
               "Retrievers",
-              "German Shepherds ",
+              "German Shepherds",
               "Golden Retrievers",
               "Pugs",
             ].map((title, index) => (
-              <div key={index} className="w-[300.58px] text-center">
+              <div
+                key={index}
+                className="w-[300.58px] text-center group cursor-pointer"
+              >
 
-                {/* Image Card */}
-                <div className="h-[348px] bg-[#f2f2f2] rounded-[19px] flex items-center justify-center">
+                {/* Image  */}
+                <div className="w-[240px] h-[260px] mx-auto overflow-hidden rounded-[24px] bg-[#f5f5f5]">
                   <img
                     src="/images/same.png"
                     alt={title}
-                    className="h-[260px] object-contain"
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
 
+
                 {/* Text */}
-                <h4 className="mt-[16px] font-medium text-[16px]">
+                <h4 className="mt-[16px] font-medium text-[16px] leading-[22px]">
                   {title}
                 </h4>
 
@@ -1082,7 +1200,7 @@ export default function UserHome() {
                 </p>
 
                 <p className="text-[13px] text-gray-700 mt-[2px] font-medium">
-                  ₹25000
+                  ₹25,000
                 </p>
 
               </div>
@@ -1093,7 +1211,7 @@ export default function UserHome() {
           {/* Right Arrow */}
           <button
             className="
-        absolute -right-[40px] top-[140px]
+        absolute -right-[40px] top-[120px]
         w-[44px] h-[44px]
         rounded-full bg-white
         shadow-[0_8px_20px_rgba(0,0,0,0.15)]
@@ -1103,112 +1221,161 @@ export default function UserHome() {
           >
             →
           </button>
-
         </div>
       </section>
 
 
 
       <section className="w-full py-12">
-  <div className="mx-auto max-w-[1300px] border-2 border-blue-500 bg-[#cddcff] rounded-sm">
-    <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-12 px-12 py-10">
-      
-      {/* Left Content */}
-      <div>
-        <h1 className="text-4xl md:text-5xl font-medium text-black leading-tight mb-6">
-          Give your space the <br /> glow-up it deserves
-        </h1>
+        <div className="mx-auto max-w-[1300px] border-2 border-blue-500 bg-[#cddcff] rounded-sm">
+          <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-12 px-12 py-10">
 
-        <p className="text-sm text-gray-700 max-w-md">
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry
-        </p>
-      </div>
+            {/* Left Content */}
+            <div>
+              <h1 className="text-4xl md:text-5xl font-medium text-black leading-tight mb-6">
+                Give your space the <br /> glow-up it deserves
+              </h1>
 
-      {/* Right Image Box */}
-      <div className=" p-6 rounded-sm flex items-center justify-center h-[400px]">
-        <Image
-          src="/images/civil.jpg"
-          alt="Construction"
-          width={720}
-          height={460}
-          className="object-contain max-h-full"
-        />
-      </div>
+              <p className="text-sm text-gray-700 max-w-md">
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry
+              </p>
+            </div>
 
-    </div>
-  </div>
-</section>
+            {/* Right Image Box */}
+            <div className=" p-6 rounded-sm flex items-center justify-center h-[400px]">
+              <Image
+                src="/images/civil.jpg"
+                alt="Construction"
+                width={720}
+                height={460}
+                className="object-contain max-h-full"
+              />
+            </div>
 
-
-
- <footer className="w-full bg-white">
-      {/* Top Footer */}
-      <div className="mx-auto max-w-[1500px] px-12 py-16 grid grid-cols-1 md:grid-cols-4 gap-12">
-        {/* Company */}
-        <div>
-          <h4 className="font-semibold text-black mb-4">Company</h4>
-          <ul className="space-y-2 text-sm text-gray-700">
-            <li>About The Company</li>
-            <li>Build Career With Us</li>
-            <li>Resources</li>
-            <li>Case Studies</li>
-            <li>Portfolio</li>
-            <li>Contact Us</li>
-          </ul>
-        </div>
-
-                   {/* Services */}
-        
-        <div>
-          <h4 className="font-semibold text-black mb-4">Services</h4>
-          <ul className="space-y-2 text-sm text-gray-700">
-            <li>Local Contractor</li>
-            <li>Door to Door Services</li>
-            <li>Pet Foods</li>
-            <li>Smart Locker</li>
-            <li>Installation & uninstallation</li>
-            <li>Support Services</li>
-          </ul>
-        </div>
-
-        {/* Professionals */}
-        <div>
-          <h4 className="font-semibold text-black mb-4">For professionals</h4>
-          <ul className="space-y-2 text-sm text-gray-700">
-            <li>Register as professional</li>
-          </ul>
-        </div>
-
-        {/* Social */}
-        <div>
-          <h4 className="font-semibold text-black mb-4">Social links</h4>
-
-          <div className="flex items-center gap-3 mb-6">
-            <span className="w-8 h-8 flex items-center justify-center rounded-full bg-black text-white text-sm"><FaFacebookF /></span>
-            <span className="w-8 h-8 flex items-center justify-center rounded-full bg-black text-white text-sm"><FaInfinity /></span>
-            <span className="w-8 h-8 flex items-center justify-center rounded-full bg-black text-white text-sm"><FaInstagram /></span>
-            <span className="w-8 h-8 flex items-center justify-center rounded-full bg-black text-white text-sm"><FaLinkedinIn /></span>
-          </div>
-
-          <div className="space-y-3">
-            <Image src="/images/appstore.png" alt="App Store" width={150} height={45} />
-            <Image src="/images/playstore.png" alt="Play Store" width={150} height={45} />
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Middle Links */}
-      <div className="text-center text-sm text-gray-700 mb-6 space-x-6">
-        <span>Terms of Use</span>
-        <span>Privacy</span>
-        <span>Terms & Conditions</span>
-      </div>
 
-      {/* Bottom Bar */}
-      <div className="bg-[#0c1633] text-white text-center text-sm py-4 rounded-t-4xl">
-        Copyright © 2025 Visvashome Pvt. Ltd. All rights reserved.
-      </div>
-    </footer>
+      <footer className="w-full bg-white">
+        {/* Top Footer */}
+        <div className="mx-auto max-w-[1500px] px-12 py-16 grid grid-cols-1 md:grid-cols-4 gap-12">
+          {/* Company */}
+          <div>
+            <h4 className="font-semibold text-black mb-4">Company</h4>
+            <ul className="space-y-2 text-sm text-gray-700">
+              <li>About The Company</li>
+              <li>Build Career With Us</li>
+              <li>Resources</li>
+              <li>Case Studies</li>
+              <li>Portfolio</li>
+              <li>Contact Us</li>
+            </ul>
+          </div>
+
+          {/* Services */}
+          <div>
+            <h4 className="font-semibold text-black mb-4">Services</h4>
+            <ul className="space-y-2 text-sm text-gray-700">
+              <li>Local Contractor</li>
+              <li>Door to Door Services</li>
+              <li>Pet Foods</li>
+              <li>Smart Locker</li>
+              <li>Installation & uninstallation</li>
+              <li>Support Services</li>
+            </ul>
+          </div>
+
+          {/* Professionals */}
+          <div>
+            <h4 className="font-semibold text-black mb-4">For professionals</h4>
+            <ul className="space-y-2 text-sm text-gray-700">
+              <li>Register as professional</li>
+            </ul>
+          </div>
+
+          {/* Social */}
+          <div>
+            <h4 className="font-semibold text-black mb-4">Social links</h4>
+
+            <div className="flex items-center gap-3 mb-6">
+              <a
+                href="https://www.facebook.com/yourpage"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 flex items-center justify-center rounded-full bg-black text-white text-sm"
+              >
+                <FaFacebookF />
+              </a>
+
+              <a
+                href="https://yourwebsite.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 flex items-center justify-center rounded-full bg-black text-white text-sm"
+              >
+                <FaInfinity />
+              </a>
+
+              <a
+                href="https://www.instagram.com/yourprofile"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 flex items-center justify-center rounded-full bg-black text-white text-sm"
+              >
+                <FaInstagram />
+              </a>
+
+              <a
+                href="https://www.linkedin.com/company/yourcompany"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 flex items-center justify-center rounded-full bg-black text-white text-sm"
+              >
+                <FaLinkedinIn />
+              </a>
+            </div>
+
+            <div className="space-y-3">
+              <a
+                href="https://apps.apple.com/app/idYOUR_APP_ID"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                  alt="Download on the App Store"
+                  className="h-[45px] ml-2.5"
+                />
+              </a>
+
+              <a
+                href="https://play.google.com/store/apps/details?id=YOUR_PACKAGE_NAME"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+                  alt="Get it on Google Play"
+                  className="h-[60px]"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Middle Links */}
+        <div className="text-center text-sm text-gray-700 mb-6 space-x-6">
+          <span className="cursor-pointer">Terms of Use</span>
+          <span className="cursor-pointer">Privacy</span>
+          <span className="cursor-pointer">Terms & Conditions</span>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="bg-[#0c1633] text-white text-center text-sm py-4 rounded-t-4xl">
+          Copyright © 2025 Visvashome Pvt. Ltd. All rights reserved.
+        </div>
+      </footer>
 
 
 
