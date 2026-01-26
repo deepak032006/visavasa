@@ -1,223 +1,337 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
-import { FaFacebookF, FaInfinity, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import Footer from "../../components/footer/page";
 
-/* -------------------- CONSTANTS -------------------- */
 
-const SERVICE_CATEGORIES = [
-  "Cat Food",
-  "Rabbit Food",
-  "Dog Food",
-  "Birds Food",
-  "Pet Toys",
-  "Pet House",
-];
+/* ---------------- DATA ---------------- */
 
-const FAQS = [
-  "What are the payment terms for the service?",
-  "What if cancel a booking in the middle for the service?",
-  "Who will clean up the house after the service?",
-  "What if I have an issue or a doubt which I need to resolve After Book?",
-];
+const SERVICES = {
+  "Cat Food": [
+    { id: "c1", title: "Switchbox Installation", price: 898, time: "60 mins" },
+    { id: "c2", title: "AC Switchbox Installation", price: 898, time: "60 mins" },
+  ],
+  "Rabbit Food": [
+    { id: "r1", title: "Intense Bathroom Cleaning", price: 1299, time: "90 mins" },
+  ],
+  "Dog Food": [
+    { id: "d1", title: "Intense Bathroom Cleaning", price: 1299, time: "90 mins" },
+  ],
+  "Birds Food": [
+    { id: "b1", title: "Ceiling Fan Cleaning", price: 499, time: "30 mins" },
+  ],
+  "Pet Toys": [
+    { id: "p1", title: "Microwave Cleaning", price: 399, time: "30 mins" },
+  ],
+  "Pet House": [
+    { id: "h1", title: "Inverter Installation", price: 1499, time: "90 mins" },
+  ],
+};
 
-/* -------------------- COMPONENTS -------------------- */
 
-const Navbar = () => (
-  <nav className="flex items-center h-20 px-10 bg-white border-b">
-    <div className="flex items-center gap-2">
-      <img src="/images/logo.png" alt="VisvasaHome" className="h-9 w-9" />
-      <span className="text-lg font-semibold text-[#0B3E74]">VisvasaHome</span>
-    </div>
+const faqs = [
+  {
+    question: "What are the payment terms for the service?",
+    answer:
+      "Payments can be made online using supported payment methods at the time of booking.",
+  },
+  {
+    question: "What if I cancel a booking in the middle of the service?",
+    answer:
+      "If you cancel mid-service, charges may apply based on the work already completed.",
+  },
+  {
+    question: "Who will clean up the house after the service?",
+    answer:
+      "Our professionals ensure basic cleanup after completing the service.",
+  },
+  {
+    question: "What if I have an issue or a doubt after booking?",
+    answer:
+      "You can contact our support team anytime through the help section.",
+  },
+]
+
+/* ---------------- NAVBAR ---------------- */
+
+const Navbar = ({ search, setSearch }) => (
+  <nav className="flex items-center h-20 px-10 bg-white ">
+    <Image src="/images/logo.png" alt="Logo" width={120} height={40} />
 
     <div className="flex flex-1 justify-center gap-4">
-      <select className="w-60 rounded-lg border border-gray-300 px-4 py-2.5 text-sm text-gray-600 focus:ring-2 focus:ring-blue-500">
+      <select className="w-64 border rounded-lg px-4 py-2 text-sm">
         <option>Gandhi Path, Jaipur</option>
-        <option>Vaishali Nagar</option>
       </select>
-
       <input
-        type="text"
         placeholder="Search for ‘Electrician’"
-        className="w-80 rounded-lg border border-gray-300 px-4 py-2.5 text-sm placeholder-gray-400 focus:ring-2 focus:ring-blue-500"
+        className="w-96 border rounded-lg px-4 py-2 text-sm"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
       />
     </div>
   </nav>
 );
 
-const HeroSection = () => (
-  <section className="bg-white px-10 py-8">
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
-      <div>
-        <h1 className="text-3xl font-bold text-gray-900">Odgri Pets Food</h1>
-        <p className="mt-2 text-gray-600">⭐ 4.7 (4.8K Reviews)</p>
+/* ---------------- SERVICE ITEM ---------------- */
 
-        <ul className="mt-4 space-y-2 text-sm text-gray-700">
-          <li>• 100% Genuine Products</li>
-          <li>• Vet Recommended</li>
-          <li>• Fast Delivery</li>
-        </ul>
-      </div>
+const ServiceItem = ({ item, cart, setCart }) => {
+  const qty = cart[item.id]?.qty || 0;
 
-      <div className="lg:col-span-2">
-        <div className="relative h-115 w-full rounded-2xl overflow-hidden">
-          <Image
-            src="/images/banner.png"
-            alt="Odgri Pets Food Banner"
-            fill
-            className="object-cover"
-            priority
-          />
-        </div>
-      </div>
-    </div>
-  </section>
-);
+  const add = () =>
+    setCart((c) => ({
+      ...c,
+      [item.id]: { ...item, qty: qty + 1 },
+    }));
 
-const ServiceItem = () => (
-  <div className="flex items-start justify-between gap-6">
-    <div className="flex-1">
-      <h4 className="font-medium">Switchbox Installation</h4>
-      <p className="text-sm text-gray-500 mt-1">⭐ 4.79 (4.1K reviews)</p>
-      <p className="text-sm text-gray-700 mt-1">₹898 • 60 mins</p>
-      <button className="text-sm text-blue-600 mt-2">View Details</button>
-    </div>
+  const remove = () => {
+    if (qty === 1) {
+      const c = { ...cart };
+      delete c[item.id];
+      setCart(c);
+    } else {
+      setCart((c) => ({
+        ...c,
+        [item.id]: { ...item, qty: qty - 1 },
+      }));
+    }
+  };
 
-    <div className="flex flex-col items-center gap-2">
-      <div className="w-20 h-20 bg-gray-200 rounded-md" />
-      <button className="px-4 py-1.5 text-sm border rounded-lg text-blue-600">
+  return (
+   <div className="flex justify-between gap-2 py-3 last:border-b-0">
+  <div>
+    <h4 className="text-sm font-semibold">{item.title}</h4>
+    <p className="text-xs text-gray-500 mt-1">
+      ⭐ 4.79 (4.1K reviews)
+    </p>
+    <p className="text-xs mt-1">
+      ₹{item.price} • {item.time}
+    </p>
+    <p className="text-xs text-purple-600 mt-1 cursor-pointer">
+      View Details
+    </p>
+  </div>
+
+  {qty === 0 ? (
+    <div className="flex flex-col items-center gap-1">
+      <Image
+        src="/images/same.png"
+        alt="icon"
+        width={30}
+        height={30}
+      />
+      <button
+        onClick={add}
+        className="h-fit px-4 py-1 border rounded text-purple-600 text-sm"
+      >
         Add
       </button>
     </div>
-  </div>
-);
-
-const ServiceSection = ({ title }) => (
-  <div className="bg-white rounded-xl border p-6">
-    <h2 className="text-xl font-semibold mb-6">{title}</h2>
-    <div className="space-y-6">
-      {[1, 2, 3, 4].map((item) => (
-        <ServiceItem key={item} />
-      ))}
+  ) : (
+    <div className="flex items-center gap-2 border rounded px-2 py-1">
+      <button onClick={remove}>−</button>
+      <span>{qty}</span>
+      <button onClick={add}>+</button>
     </div>
-  </div>
-);
+  )}
+</div>
 
-const FAQSection = () => (
-  <section className="bg-white py-12 border-t">
-    <div className="w-full px-4">
-      <h2 className="text-xl font-semibold mb-4">
-        Frequently asked questions
-      </h2>
+  );
+};
 
-      {FAQS.map((question, index) => (
-        <div
-          key={question}
-          className={`flex items-center justify-between py-4 ${
-            index !== FAQS.length - 1 ? "border-b" : ""
-          }`}
-        >
-          <p className="text-sm text-gray-800">{question}</p>
-          <span className="text-gray-400">⌄</span>
+/* ---------------- CART ---------------- */
+
+const Cart = ({ cart }) => {
+  const items = Object.values(cart);
+  const total = items.reduce((s, i) => s + i.price * i.qty, 0);
+
+  return (
+    <div className="sticky top-24  rounded-xl p-5 bg-white">
+      <h3 className="font-semibold mb-4">Cart</h3>
+
+      {items.length === 0 ? (
+        <div className="text-center py-10 text-gray-500">
+          <Image
+            src="/images/cart.png"
+            alt="Empty"
+            width={400}
+            height={70}
+          />
+          <p className="text-sm mt-4">No items in your cart</p>
         </div>
-      ))}
+      ) : (
+        <>
+          {items.map((i) => (
+            <div key={i.id} className="flex justify-between mb-3 text-sm">
+              <div>
+                <p>{i.title}</p>
+                <p className="text-xs text-gray-500">
+                  ₹{i.price} × {i.qty}
+                </p>
+              </div>
+              <p>₹{i.price * i.qty}</p>
+            </div>
+          ))}
+
+          <hr className="my-4" />
+
+          <div className="flex justify-between font-semibold">
+            <span>Total</span>
+            <span>₹{total}</span>
+          </div>
+
+          <button className="w-full mt-4 bg-purple-600 text-white py-2 rounded-lg">
+            Book Now
+          </button>
+        </>
+      )}
     </div>
-  </section>
-);
+  );
+};
 
-const Footer = () => (
-  <footer className="w-full bg-white">
-    <div className="mx-auto max-w-[1500px] px-12 py-16 grid grid-cols-1 md:grid-cols-4 gap-12">
-      <FooterColumn
-        title="Company"
-        items={[
-          "About The Company",
-          "Build Career With Us",
-          "Resources",
-          "Case Studies",
-          "Portfolio",
-          "Contact Us",
-        ]}
-      />
-
-      <FooterColumn
-        title="Services"
-        items={[
-          "Local Contractor",
-          "Door to Door Services",
-          "Pet Foods",
-          "Smart Locker",
-          "Installation & uninstallation",
-          "Support Services",
-        ]}
-      />
-
-      <FooterColumn
-        title="For professionals"
-        items={["Register as professional"]}
-      />
-
-      <div>
-        <h4 className="font-semibold mb-4">Social links</h4>
-
-        <div className="flex gap-3 mb-6">
-          {[FaFacebookF, FaInfinity, FaInstagram, FaLinkedinIn].map(
-            (Icon, i) => (
-              <span
-                key={i}
-                className="w-8 h-8 flex items-center justify-center rounded-full bg-black text-white text-sm"
-              >
-                <Icon />
-              </span>
-            )
-          )}
-        </div>
-
-        <div className="space-y-3">
-          <Image src="/images/appstore.png" alt="App Store" width={150} height={45} />
-          <Image src="/images/playstore.png" alt="Play Store" width={150} height={45} />
-        </div>
-      </div>
-    </div>
-
-    <div className="text-center text-sm text-gray-700 mb-6 space-x-6">
-      <span>Terms of Use</span>
-      <span>Privacy</span>
-      <span>Terms & Conditions</span>
-    </div>
-
-    <div className="bg-[#0c1633] text-white text-center text-sm py-4 rounded-t-4xl">
-      Copyright © 2025 Visvashome Pvt. Ltd. All rights reserved.
-    </div>
-  </footer>
-);
-
-const FooterColumn = ({ title, items }) => (
-  <div>
-    <h4 className="font-semibold mb-4">{title}</h4>
-    <ul className="space-y-2 text-sm text-gray-700">
-      {items.map((item) => (
-        <li key={item}>{item}</li>
-      ))}
-    </ul>
-  </div>
-);
-
-/* -------------------- PAGE -------------------- */
+/* ---------------- PAGE ---------------- */
 
 export default function OdgriPage() {
-  return (
-    <main className="min-h-screen bg-gray-50">
-      <Navbar />
-      <HeroSection />
+  const [cart, setCart] = useState({});
+  const [openIndex, setOpenIndex] = useState(null);
+  const [search, setSearch] = useState("");
 
-      <section className="px-10 py-10">
-        <div className="max-w-5xl mx-auto space-y-10">
-          {SERVICE_CATEGORIES.map((category) => (
-            <ServiceSection key={category} title={category} />
+  const filteredServices = Object.fromEntries(
+    Object.entries(SERVICES).map(([cat, items]) => [
+      cat,
+      items.filter(
+        (item) =>
+          item.title.toLowerCase().includes(search.toLowerCase()) ||
+          cat.toLowerCase().includes(search.toLowerCase())
+      ),
+    ])
+  );
+
+
+  return (
+    <main className="bg-gray-50 min-h-screen">
+      <Navbar search={search} setSearch={setSearch} />
+
+
+      {/* HERO */}
+      <section className="bg-white px-10 py-4 ">
+        <div className="mb-4">
+          <h1 className="text-3xl font-semibold text-gray-900">
+            Odgri Pets Food
+          </h1>
+
+          <div className="flex items-center gap-2 mt-1 text-gray-700">
+            <span className="text-sm">★</span>
+            <span className="text-sm font-medium">4.79</span>
+            <span className="text-sm text-gray-500">
+              (4.1K Bookings)
+            </span>
+          </div>
+        </div>
+
+        <div className="flex gap-5 items-center">
+
+          {/* LEFT : Visvasa Promise (compact) */}
+          <div className="w-[300px] border border-[#C8C4C4] rounded-lg px-4 py-3 mb-85">
+            <h2 className="font-semibold text-sm mb-2">
+              Visvasa Promise
+            </h2>
+
+            <ul className="space-y-1 text-xs text-gray-700">
+              <li className="flex items-center gap-2">
+                ✔ Verified Professionals
+              </li>
+              <li className="flex items-center gap-2">
+                ✔ Hassle Free Booking
+              </li>
+              <li className="flex items-center gap-2">
+                ✔ Transparent Pricing
+              </li>
+            </ul>
+          </div>
+
+          {/* RIGHT : Banner (shorter height) */}
+          <div className="flex-1 max-h-[480px] rounded-[24px] overflow-hidden">
+            <Image
+              src="/images/banner.png"
+              alt="Banner"
+              width={800}
+              height={280}
+              className="w-full h-[480px] object-cover rounded-[24px]"
+              priority
+            />
+          </div>
+
+
+        </div>
+      </section>
+
+
+
+      {/* CONTENT */}
+      <section className="px-10 py-8">
+        <div className="grid grid-cols-12 gap-6 max-w-7xl mx-auto">
+          {/* LEFT */}
+          <div className="col-span-8 space-y-6">
+            {Object.entries(filteredServices)
+              .filter(([cat, items]) => items.length > 0)
+              .map(([cat, items]) => (
+                <div key={cat} className="bg-white border border-[#C8C4C4] rounded-xl p-4 w-[520px] ml-60">
+                  <h3 className="font-semibold mb-3">{cat}</h3>
+                  {items.map((item) => (
+                    <ServiceItem
+                      key={item.id}
+                      item={item}
+                      cart={cart}
+                      setCart={setCart}
+                    />
+                  ))}
+                </div>
+              ))}
+
+          </div>
+
+          {/* RIGHT */}
+          <div className="col-span-4">
+            <Cart cart={cart} />
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="bg-white px-10 py-10 border-t border-[#C8C4C4]">
+        <h3 className="font-semibold mb-6">Frequently asked questions</h3>
+
+        <div className="space-y-2">
+          {faqs.map((faq, index) => (
+            <div key={index} className="border-b border-[#C8C4C4]">
+              <button
+                onClick={() =>
+                  setOpenIndex(openIndex === index ? null : index)
+                }
+                className="w-full flex justify-between items-center py-4 text-left"
+              >
+                <span className="text-sm text-gray-800">
+                  {faq.question}
+                </span>
+                <span
+                  className={`transform transition-transform ${openIndex === index ? "rotate-180" : ""
+                    }`}
+                >
+                  ▾
+                </span>
+              </button>
+
+              {openIndex === index && (
+                <p className="text-sm text-gray-600 pb-4 pr-6">
+                  {faq.answer}
+                </p>
+              )}
+            </div>
           ))}
         </div>
       </section>
 
-      <FAQSection />
       <Footer />
     </main>
   );

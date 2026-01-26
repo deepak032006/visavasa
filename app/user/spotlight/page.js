@@ -1,44 +1,330 @@
 "use client";
 
-export default function SpotlightSection() {
-  const images = [
-    "/images/slider.png",
-    "/images/slider1.png",
-    "/images/slider.png",
-  ];
+import { useState } from "react";
+import Image from "next/image";
+import Footer from "../../components/footer/page";
+
+
+/* ---------------- DATA ---------------- */
+
+const SERVICES = {
+  "Combos": [
+    { id: "c1", title: "classic cleaning (2bathrooms) ", price: 898, time: "60 mins" },
+    { id: "c2", title: "Water Tank Cleaning", price: 898, time: "60 mins" },
+    { id: "c3", title: "Water Tank Cleaning", price: 898, time: "60 mins" },
+    { id: "c4", title: "classic cleaning (2bathrooms) ", price: 898, time: "60 mins" },
+    { id: "c5", title: "classic cleaning (2bathrooms) ", price: 898, time: "60 mins" },
+  ],
+  "Bathroom cleaning": [
+    { id: "r1", title: "Intense bathroom cleaning", price: 1299, time: "90 mins" },
+    { id: "r2", title: "Intense bathroom cleaning", price: 1299, time: "90 mins" },
+    { id: "r3", title: "Intense bathroom cleaning", price: 1299, time: "90 mins" },
+  ],
+  "Kitchen cleaning": [
+    { id: "d1", title: "Intense bathroom cleaning ", price: 1299, time: "90 mins" },
+    { id: "d2", title: "Intense bathroom cleaning ", price: 1299, time: "90 mins" },
+    { id: "d3", title: "Intense bathroom cleaning ", price: 1299, time: "90 mins" },
+    { id: "d4", title: "Intense bathroom cleaning ", price: 1299, time: "90 mins" },
+  ],
+  "Mini Services": [
+    { id: "b1", title: "Ceiling fan cleaing  ", price: 499, time: "30 mins" },
+    { id: "b2", title: "Exhaut fan cleaning   ", price: 499, time: "30 mins" },
+    { id: "b3", title: "kitchen sink cleaning ", price: 499, time: "30 mins" },
+    { id: "b4", title: "utensil removal & placing back  ", price: 499, time: "30 mins" },
+  ],
+  "Pet Toys": [
+    { id: "p1", title: "Microwave Cleaning", price: 399, time: "30 mins" },
+  ],
+  "Pet House": [
+    { id: "h1", title: "Inverter Installation", price: 1499, time: "90 mins" },
+  ],
+};
+
+
+const faqs = [
+  {
+    question: "What are the payment terms for the service?",
+    answer:
+      "Payments can be made online using supported payment methods at the time of booking.",
+  },
+  {
+    question: "What if I cancel a booking in the middle of the service?",
+    answer:
+      "If you cancel mid-service, charges may apply based on the work already completed.",
+  },
+  {
+    question: "Who will clean up the house after the service?",
+    answer:
+      "Our professionals ensure basic cleanup after completing the service.",
+  },
+  {
+    question: "What if I have an issue or a doubt after booking?",
+    answer:
+      "You can contact our support team anytime through the help section.",
+  },
+]
+
+/* ---------------- NAVBAR ---------------- */
+
+const Navbar = () => (
+  <nav className="flex items-center h-20 px-10 bg-white ">
+    <Image src="/images/logo.png" alt="Logo" width={120} height={40} />
+
+    <div className="flex flex-1 justify-center gap-4">
+      <select className="w-64 border rounded-lg px-4 py-2 text-sm">
+        <option>Gandhi Path, Jaipur</option>
+      </select>
+      <input
+        placeholder="Search for ‘Electrician’"
+        className="w-96 border rounded-lg px-4 py-2 text-sm"
+      />
+    </div>
+  </nav>
+);
+
+/* ---------------- SERVICE ITEM ---------------- */
+
+const ServiceItem = ({ item, cart, setCart }) => {
+  const qty = cart[item.id]?.qty || 0;
+
+  const add = () =>
+    setCart((c) => ({
+      ...c,
+      [item.id]: { ...item, qty: qty + 1 },
+    }));
+
+  const remove = () => {
+    if (qty === 1) {
+      const c = { ...cart };
+      delete c[item.id];
+      setCart(c);
+    } else {
+      setCart((c) => ({
+        ...c,
+        [item.id]: { ...item, qty: qty - 1 },
+      }));
+    }
+  };
 
   return (
-    <section className="mt-[80px] px-[113px]">
-      <h2 className="text-[28px] font-semibold text-[#2f2f2f] mb-[24px]">
-        In the spotlight
-      </h2>
+    <div className="flex justify-between gap-2 py-3 last:border-b-0">
+      <div>
+        <h4 className="text-sm font-semibold">{item.title}</h4>
+        <p className="text-xs text-gray-500 mt-1">
+          ⭐ 4.79 (4.1K reviews)
+        </p>
+        <p className="text-xs mt-1">
+          ₹{item.price} • {item.time}
+        </p>
+        <p className="text-xs text-purple-600 mt-1 cursor-pointer">
+          View Details
+        </p>
+      </div>
 
-      <div className="relative">
-        <div className="flex gap-[24px] overflow-hidden">
-          {images.map((img, index) => (
-            <div
-              key={index}
-              className="group min-w-[400px] h-[250px] rounded-[16px] overflow-hidden cursor-pointer"
-            >
-              <img
-                src={img}
-                alt={`Spotlight ${index + 1}`}
-                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-              />
+      {qty === 0 ? (
+        <div className="flex flex-col items-center gap-1">
+          <Image
+            src="/images/same.png"
+            alt="icon"
+            width={30}
+            height={30}
+          />
+          <button
+            onClick={add}
+            className="h-fit px-4 py-1 border rounded text-purple-600 text-sm"
+          >
+            Add
+          </button>
+        </div>
+      ) : (
+        <div className="flex items-center gap-2 border rounded px-2 py-1">
+          <button onClick={remove}>−</button>
+          <span>{qty}</span>
+          <button onClick={add}>+</button>
+        </div>
+      )}
+    </div>
+
+  );
+};
+
+/* ---------------- CART ---------------- */
+
+const Cart = ({ cart }) => {
+  const items = Object.values(cart);
+  const total = items.reduce((s, i) => s + i.price * i.qty, 0);
+
+  return (
+    <div className="sticky top-24  rounded-xl p-5 bg-white">
+      <h3 className="font-semibold mb-4">Cart</h3>
+
+      {items.length === 0 ? (
+        <div className="text-center py-10 text-gray-500">
+          <Image
+            src="/images/cart.png"
+            alt="Empty"
+            width={400}
+            height={70}
+          />
+
+        </div>
+      ) : (
+        <>
+          {items.map((i) => (
+            <div key={i.id} className="flex justify-between mb-3 text-sm">
+              <div>
+                <p>{i.title}</p>
+                <p className="text-xs text-gray-500">
+                  ₹{i.price} × {i.qty}
+                </p>
+              </div>
+              <p>₹{i.price * i.qty}</p>
+            </div>
+          ))}
+
+          <hr className="my-4" />
+
+          <div className="flex justify-between font-semibold">
+            <span>Total</span>
+            <span>₹{total}</span>
+          </div>
+
+          <button className="w-full mt-4 bg-purple-600 text-white py-2 rounded-lg">
+            Book Now
+          </button>
+        </>
+      )}
+    </div>
+  );
+};
+
+/* ---------------- PAGE ---------------- */
+
+export default function OdgriPage() {
+  const [cart, setCart] = useState({});
+  const [openIndex, setOpenIndex] = useState(null);
+
+  return (
+    <main className="bg-gray-50 min-h-screen">
+      <Navbar />
+
+      {/* HERO */}
+      <section className="bg-white px-10 py-4 ">
+        <div className="mb-4">
+          <h1 className="text-3xl font-semibold text-gray-900">
+            bathroom & kitchen cleaning
+          </h1>
+
+          <div className="flex items-center gap-2 mt-1 text-gray-700">
+            <span className="text-sm">★</span>
+            <span className="text-sm font-medium">4.79</span>
+            <span className="text-sm text-gray-500">
+              (4.1K Bookings)
+            </span>
+          </div>
+        </div>
+
+        <div className="flex gap-5 items-center">
+
+          {/* LEFT : Visvasa Promise (compact) */}
+          <div className="w-[300px] border border-[#C8C4C4] rounded-lg px-4 py-3 mb-85">
+            <h2 className="font-semibold text-sm mb-2">
+              Visvasa Promise
+            </h2>
+
+            <ul className="space-y-1 text-xs text-gray-700">
+              <li className="flex items-center gap-2">
+                ✔ Verified Professionals
+              </li>
+              <li className="flex items-center gap-2">
+                ✔ Hassle Free Booking
+              </li>
+              <li className="flex items-center gap-2">
+                ✔ Transparent Pricing
+              </li>
+            </ul>
+          </div>
+
+          {/* RIGHT : Banner (shorter height) */}
+          <div className="flex-1 max-h-[480px] rounded-[24px] overflow-hidden">
+            <Image
+              src="/images/nn.png"
+              alt="Banner"
+              width={800}
+              height={280}
+              className="w-full h-[480px] object-cover rounded-[24px]"
+              priority
+            />
+          </div>
+
+
+        </div>
+      </section>
+
+
+
+      {/* CONTENT */}
+      <section className="px-10 py-8">
+        <div className="grid grid-cols-12 gap-6 max-w-7xl mx-auto">
+          {/* LEFT */}
+          <div className="col-span-8 space-y-6">
+            {Object.entries(SERVICES).map(([cat, items]) => (
+              <div key={cat} className="bg-white border border-[#C8C4C4]  rounded-xl p-4 w-[520px] ml-60">
+                <h3 className="font-semibold mb-3">{cat}</h3>
+                {items.map((item) => (
+                  <ServiceItem
+                    key={item.id}
+                    item={item}
+                    cart={cart}
+                    setCart={setCart}
+                  />
+                ))}
+              </div>
+            ))}
+          </div>
+
+          {/* RIGHT */}
+          <div className="col-span-4">
+            <Cart cart={cart} />
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="bg-white px-10 py-10 border-t border-[#C8C4C4]">
+        <h3 className="font-semibold mb-6">Frequently asked questions</h3>
+
+        <div className="space-y-2">
+          {faqs.map((faq, index) => (
+            <div key={index} className="border-b border-[#C8C4C4]">
+              <button
+                onClick={() =>
+                  setOpenIndex(openIndex === index ? null : index)
+                }
+                className="w-full flex justify-between items-center py-4 text-left"
+              >
+                <span className="text-sm text-gray-800">
+                  {faq.question}
+                </span>
+                <span
+                  className={`transform transition-transform ${openIndex === index ? "rotate-180" : ""
+                    }`}
+                >
+                  ▾
+                </span>
+              </button>
+
+              {openIndex === index && (
+                <p className="text-sm text-gray-600 pb-4 pr-6">
+                  {faq.answer}
+                </p>
+              )}
             </div>
           ))}
         </div>
+      </section>
 
-        {/* LEFT ARROW */}
-        <button className="absolute left-[-22px] top-1/2 -translate-y-1/2 w-[44px] h-[44px] rounded-full bg-white shadow-[0_8px_20px_rgba(0,0,0,0.15)] flex items-center justify-center text-[20px]">
-          ←
-        </button>
-
-        {/* RIGHT ARROW */}
-        <button className="absolute right-[-22px] top-1/2 -translate-y-1/2 w-[44px] h-[44px] rounded-full bg-white shadow-[0_8px_20px_rgba(0,0,0,0.15)] flex items-center justify-center text-[20px]">
-          →
-        </button>
-      </div>
-    </section>
+      <Footer />
+    </main>
   );
 }
