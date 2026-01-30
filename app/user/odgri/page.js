@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import Footer from "../../components/footer/page";
-
 
 /* ---------------- DATA ---------------- */
 
@@ -29,6 +29,11 @@ const SERVICES = {
   ],
 };
 
+const banners = [
+  "/images/banner.png",
+  "/images/same.png",
+  "/images/same1.png",
+];
 
 const faqs = [
   {
@@ -51,7 +56,7 @@ const faqs = [
     answer:
       "You can contact our support team anytime through the help section.",
   },
-]
+];
 
 /* ---------------- NAVBAR ---------------- */
 
@@ -64,7 +69,7 @@ const Navbar = ({ search, setSearch }) => (
         <option>Gandhi Path, Jaipur</option>
       </select>
       <input
-        placeholder="Search for ‘Electrician’"
+        placeholder="Search for 'Electrician'"
         className="w-96 border rounded-lg px-4 py-2 text-sm"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
@@ -77,6 +82,7 @@ const Navbar = ({ search, setSearch }) => (
 
 const ServiceItem = ({ item, cart, setCart }) => {
   const qty = cart[item.id]?.qty || 0;
+  const router = useRouter();
 
   const add = () =>
     setCart((c) => ({
@@ -97,45 +103,53 @@ const ServiceItem = ({ item, cart, setCart }) => {
     }
   };
 
+  const handleServiceClick = () => {
+    // Navigate to service detail page
+    router.push(`/user/odgri/service-detail/${item.id}`);
+  };
+
   return (
-   <div className="flex justify-between gap-2 py-3 last:border-b-0">
-  <div>
-    <h4 className="text-sm font-semibold">{item.title}</h4>
-    <p className="text-xs text-gray-500 mt-1">
-      ⭐ 4.79 (4.1K reviews)
-    </p>
-    <p className="text-xs mt-1">
-      ₹{item.price} • {item.time}
-    </p>
-    <p className="text-xs text-purple-600 mt-1 cursor-pointer">
-      View Details
-    </p>
-  </div>
+    <div
+      className="flex justify-between gap-2 py-3 last:border-b-0 cursor-pointer"
+      onClick={handleServiceClick}
+    >
+      <div>
+        <h4 className="text-start font-semibold">{item.title}</h4>
+        <p className="text-xs text-gray-500 mt-1">
+          ⭐ 4.79 (4.1K reviews)
+        </p>
+        <p className="text-xs mt-1">
+          ₹{item.price} • {item.time}
+        </p>
+        <p className="text-xs text-purple-600 mt-1 cursor-pointer">
+          View Details
+        </p>
+      </div>
 
-  {qty === 0 ? (
-    <div className="flex flex-col items-center gap-1">
-      <Image
-        src="/images/same.png"
-        alt="icon"
-        width={30}
-        height={30}
-      />
-      <button
-        onClick={add}
-        className="h-fit px-4 py-1 border rounded text-purple-600 text-sm"
-      >
-        Add
-      </button>
+      {qty === 0 ? (
+        <div className="flex flex-col items-center gap-1">
+          <Image src="/images/same.png" alt="icon" width={80} height={30} />
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              add();
+            }}
+            className="h-fit px-4 py-1 border rounded text-purple-600 text-sm"
+          >
+            Add
+          </button>
+        </div>
+      ) : (
+        <div
+          className="flex items-center gap-2 border rounded px-2 py-1"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button onClick={remove}>−</button>
+          <span>{qty}</span>
+          <button onClick={add}>+</button>
+        </div>
+      )}
     </div>
-  ) : (
-    <div className="flex items-center gap-2 border rounded px-2 py-1">
-      <button onClick={remove}>−</button>
-      <span>{qty}</span>
-      <button onClick={add}>+</button>
-    </div>
-  )}
-</div>
-
   );
 };
 
@@ -146,17 +160,12 @@ const Cart = ({ cart }) => {
   const total = items.reduce((s, i) => s + i.price * i.qty, 0);
 
   return (
-    <div className="sticky top-24  rounded-xl p-5 bg-white">
+    <div className="sticky top-24 rounded-xl p-5 bg-white">
       <h3 className="font-semibold mb-4">Cart</h3>
 
       {items.length === 0 ? (
         <div className="text-center py-10 text-gray-500">
-          <Image
-            src="/images/cart.png"
-            alt="Empty"
-            width={400}
-            height={70}
-          />
+          <Image src="/images/cart.png" alt="Empty" width={400} height={70} />
           <p className="text-sm mt-4">No items in your cart</p>
         </div>
       ) : (
@@ -195,6 +204,14 @@ export default function OdgriPage() {
   const [cart, setCart] = useState({});
   const [openIndex, setOpenIndex] = useState(null);
   const [search, setSearch] = useState("");
+  const [currentBanner, setCurrentBanner] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentBanner((prev) => (prev + 1) % banners.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   const filteredServices = Object.fromEntries(
     Object.entries(SERVICES).map(([cat, items]) => [
@@ -207,11 +224,9 @@ export default function OdgriPage() {
     ])
   );
 
-
   return (
     <main className="bg-gray-50 min-h-screen">
       <Navbar search={search} setSearch={setSearch} />
-
 
       {/* HERO */}
       <section className="bg-white px-10 py-4 ">
@@ -223,61 +238,64 @@ export default function OdgriPage() {
           <div className="flex items-center gap-2 mt-1 text-gray-700">
             <span className="text-sm">★</span>
             <span className="text-sm font-medium">4.79</span>
-            <span className="text-sm text-gray-500">
-              (4.1K Bookings)
-            </span>
+            <span className="text-sm text-gray-500">(4.1K Bookings)</span>
           </div>
         </div>
 
         <div className="flex gap-5 items-center">
-
-          {/* LEFT : Visvasa Promise (compact) */}
-          <div className="w-[300px] border border-[#C8C4C4] rounded-lg px-4 py-3 mb-85">
-            <h2 className="font-semibold text-sm mb-2">
-              Visvasa Promise
-            </h2>
-
+          {/* LEFT */}
+          <div className="w-[300px] border mb-80 border-[#C8C4C4] rounded-lg px-4 py-3">
+            <h2 className="font-semibold text-sm mb-2">Visvasa Promise</h2>
             <ul className="space-y-1 text-xs text-gray-700">
-              <li className="flex items-center gap-2">
-                ✔ Verified Professionals
-              </li>
-              <li className="flex items-center gap-2">
-                ✔ Hassle Free Booking
-              </li>
-              <li className="flex items-center gap-2">
-                ✔ Transparent Pricing
-              </li>
+              <li>✔ Verified Professionals</li>
+              <li>✔ Hassle Free Booking</li>
+              <li>✔ Transparent Pricing</li>
             </ul>
           </div>
 
-          {/* RIGHT : Banner (shorter height) */}
+          {/* RIGHT SLIDER */}
           <div className="flex-1 max-h-[480px] rounded-[24px] overflow-hidden">
-            <Image
-              src="/images/banner.png"
-              alt="Banner"
-              width={800}
-              height={280}
-              className="w-full h-[480px] object-cover rounded-[24px]"
-              priority
-            />
+            <div
+              className="flex transition-transform duration-700 ease-in-out"
+              style={{ transform: `translateX(-${currentBanner * 100}%)` }}
+            >
+              {banners.map((src, i) => (
+                <Image
+                  key={i}
+                  src={src}
+                  alt="Banner"
+                  width={800}
+                  height={480}
+                  className="w-full h-[780px] object-cover flex-shrink-0"
+                  priority
+                />
+              ))}
+            </div>
           </div>
-
-
         </div>
       </section>
-
-
 
       {/* CONTENT */}
       <section className="px-10 py-8">
         <div className="grid grid-cols-12 gap-6 max-w-7xl mx-auto">
-          {/* LEFT */}
           <div className="col-span-8 space-y-6">
             {Object.entries(filteredServices)
               .filter(([cat, items]) => items.length > 0)
               .map(([cat, items]) => (
-                <div key={cat} className="bg-white border border-[#C8C4C4] rounded-xl p-4 w-[520px] ml-60">
-                  <h3 className="font-semibold mb-3">{cat}</h3>
+                <div
+                  key={cat}
+                  className="bg-white border border-[#C8C4C4] rounded-xl p-4 w-[520px] ml-60"
+                >
+                  <h3
+                    className={`mb-3 ${cat === "Cat Food" || cat === "Dog Food" || cat === "Birds Food" || cat === "Rabbit Food"
+                      || cat === "Pet Toys"
+                        ? "text-xl font-bold"
+                        : "font-semibold"
+                      }`}
+                  >
+                    {cat}
+                  </h3>
+
                   {items.map((item) => (
                     <ServiceItem
                       key={item.id}
@@ -288,10 +306,8 @@ export default function OdgriPage() {
                   ))}
                 </div>
               ))}
-
           </div>
 
-          {/* RIGHT */}
           <div className="col-span-4">
             <Cart cart={cart} />
           </div>
@@ -314,12 +330,7 @@ export default function OdgriPage() {
                 <span className="text-sm text-gray-800">
                   {faq.question}
                 </span>
-                <span
-                  className={`transform transition-transform ${openIndex === index ? "rotate-180" : ""
-                    }`}
-                >
-                  ▾
-                </span>
+                <span>{openIndex === index ? "▲" : "▼"}</span>
               </button>
 
               {openIndex === index && (

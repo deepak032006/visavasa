@@ -7,9 +7,9 @@ export default function SpotlightSection() {
   const router = useRouter();
 
   const images = [
-    "/images/slider.png",
-    "/images/slider1.png",
-    "/images/slider.png",
+    "/images/spolight2.png",
+    "/images/spolight1.png",
+    "/images/spolight.png",
     "/images/slider1.png",
   ];
 
@@ -95,20 +95,7 @@ export default function SpotlightSection() {
         </div>
 
         {/* LEFT */}
-        <button
-          onClick={slideLeft}
-          className="absolute left-[-22px] top-1/2 -translate-y-1/2 w-[44px] h-[44px] rounded-full bg-white shadow-[0_8px_20px_rgba(0,0,0,0.15)] flex items-center justify-center text-[20px]"
-        >
-          ←
-        </button>
-
-        {/* RIGHT */}
-        <button
-          onClick={slideRight}
-          className="absolute right-[-22px] top-1/2 -translate-y-1/2 w-[44px] h-[44px] rounded-full bg-white shadow-[0_8px_20px_rgba(0,0,0,0.15)] flex items-center justify-center text-[20px]"
-        >
-          →
-        </button>
+       
       </div>
     </section>
   );

@@ -4,41 +4,47 @@ import { useRef, useState } from "react";
 
 export default function ApplianceServiceRepair() {
   const services = [
-    "Auto Top load machine check-up",
-    "AC Uninstallation",
-    "TV check-up",
-    "Solar panel uninstallation",
-    "Semi-automatic check-up",
-    "Solar panel uninstallation",
+    {
+      title: "Auto Top load machine check-up",
+      image: "/images/washing.png",
+    },
+    {
+      title: "AC Uninstallation",
+      image: "/images/ac.png",
+    },
+    {
+      title: "TV check-up",
+      image: "/images/tv.png",
+    },
+    {
+      title: "Solar panel uninstallation",
+      image: "/images/drill.png",
+    },
+    {
+      title: "Semi-automatic check-up",
+      image: "/images/same.png",
+    },
+    {
+      title: "Solar panel uninstallation",
+      image: "/images/install.png",
+    },
   ];
 
   const sliderRef = useRef(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
+  const [showArrow, setShowArrow] = useState(false);
+  const hideTimeout = useRef(null);
 
-  // MOUSE EVENTS
-  const handleMouseDown = (e) => {
-    setIsDragging(true);
-    setStartX(e.pageX - sliderRef.current.offsetLeft);
-    setScrollLeft(sliderRef.current.scrollLeft);
-  };
-
-  const handleMouseUp = () => setIsDragging(false);
-  const handleMouseLeave = () => setIsDragging(false);
-
-  const handleMouseMove = (e) => {
-    if (!isDragging) return;
-    e.preventDefault();
-
-    const x = e.pageX - sliderRef.current.offsetLeft;
-    const walk = (x - startX) * 1.5;
-    sliderRef.current.scrollLeft = scrollLeft - walk;
-  };
-
-  // ARROW
   const slideRight = () => {
     sliderRef.current.scrollBy({ left: 260, behavior: "smooth" });
+  };
+
+  const handleScroll = () => {
+    setShowArrow(true);
+    clearTimeout(hideTimeout.current);
+
+    hideTimeout.current = setTimeout(() => {
+      setShowArrow(false);
+    }, 1000);
   };
 
   return (
@@ -54,10 +60,11 @@ export default function ApplianceServiceRepair() {
         </button>
       </div>
 
-      {/* Cards Slider */}
+      {/* Slider */}
       <div className="relative">
         <div
           ref={sliderRef}
+          onScroll={handleScroll}
           className="
             flex
             gap-x-[24px]
@@ -66,40 +73,22 @@ export default function ApplianceServiceRepair() {
             cursor-grab
             active:cursor-grabbing
           "
-          onMouseDown={handleMouseDown}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseLeave}
-          onMouseMove={handleMouseMove}
         >
-          {services.map((title, index) => (
+          {services.map((service, index) => (
             <div
               key={index}
               className="w-[220px] flex-shrink-0 cursor-pointer"
             >
-              {/* Image Card */}
-              <div
-                className="
-                  w-full
-                  h-[240px]
-                  rounded-[20px]
-                  overflow-hidden
-                  bg-[#f5f5f5]
-                  shadow-[0_6px_18px_rgba(0,0,0,0.08)]
-                  transition-transform
-                  duration-300
-                  hover:scale-[1.02]
-                "
-              >
+              <div className="w-full h-[240px] rounded-[20px] overflow-hidden bg-[#f5f5f5] shadow-[0_6px_18px_rgba(0,0,0,0.08)] transition-transform duration-300 hover:scale-[1.02]">
                 <img
-                  src="/images/same.png"
-                  alt={title}
+                  src={service.image}
+                  alt={service.title}
                   className="w-full h-full object-cover"
                 />
               </div>
 
-              {/* Text */}
               <h4 className="mt-[14px] font-medium text-[16px] leading-[22px] text-[#2f2f2f]">
-                {title}
+                {service.title}
               </h4>
 
               <p className="text-[13px] text-gray-500 mt-[4px]">
@@ -116,22 +105,19 @@ export default function ApplianceServiceRepair() {
         {/* RIGHT ARROW */}
         <button
           onClick={slideRight}
-          className="
-            absolute
-            -right-[40px]
-            top-[110px]
-            w-[44px]
-            h-[44px]
-            rounded-full
-            bg-white
-            shadow-[0_8px_20px_rgba(0,0,0,0.15)]
-            flex
-            items-center
-            justify-center
-            text-[20px]
-          "
+          className={`
+            absolute top-1/2 -translate-y-1/2 right-[-20px] z-20
+            w-10 h-10 rounded-full bg-white shadow-lg
+            flex items-center justify-center
+            transition-all duration-300
+            ${
+              showArrow
+                ? "opacity-100 scale-100"
+                : "opacity-0 scale-75 pointer-events-none"
+            }
+          `}
         >
-          →
+          ➜
         </button>
       </div>
     </section>

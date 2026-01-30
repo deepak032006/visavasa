@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import Link from "next/link";
 
 export default function ConstructionContract() {
   const cards = [
@@ -13,32 +14,23 @@ export default function ConstructionContract() {
   ];
 
   const sliderRef = useRef(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
+  const [openModal, setOpenModal] = useState(false);
 
-  // MOUSE EVENTS
-  const handleMouseDown = (e) => {
-    setIsDragging(true);
-    setStartX(e.pageX - sliderRef.current.offsetLeft);
-    setScrollLeft(sliderRef.current.scrollLeft);
-  };
+  // 🔥 arrow logic
+  const [showArrow, setShowArrow] = useState(false);
+  const hideTimeout = useRef(null);
 
-  const handleMouseUp = () => setIsDragging(false);
-  const handleMouseLeave = () => setIsDragging(false);
-
-  const handleMouseMove = (e) => {
-    if (!isDragging) return;
-    e.preventDefault();
-
-    const x = e.pageX - sliderRef.current.offsetLeft;
-    const walk = (x - startX) * 1.5;
-    sliderRef.current.scrollLeft = scrollLeft - walk;
-  };
-
-  // ARROW
   const slideRight = () => {
     sliderRef.current.scrollBy({ left: 260, behavior: "smooth" });
+  };
+
+  const handleScroll = () => {
+    setShowArrow(true);
+
+    clearTimeout(hideTimeout.current);
+    hideTimeout.current = setTimeout(() => {
+      setShowArrow(false);
+    }, 1000);
   };
 
   return (
@@ -54,7 +46,14 @@ export default function ConstructionContract() {
           </p>
         </div>
 
-        <button className="text-[14px] text-blue-600 border border-blue-600 rounded-full px-[14px] py-[4px]">
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            setOpenModal(true);
+          }}
+          className="text-[14px] text-blue-600 border border-blue-600 rounded-full px-[14px] py-[4px]"
+        >
           See all
         </button>
       </div>
@@ -63,6 +62,7 @@ export default function ConstructionContract() {
       <div className="relative">
         <div
           ref={sliderRef}
+          onScroll={handleScroll}   // ✅ IMPORTANT
           className="
             flex
             gap-x-[24px]
@@ -71,30 +71,13 @@ export default function ConstructionContract() {
             cursor-grab
             active:cursor-grabbing
           "
-          onMouseDown={handleMouseDown}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseLeave}
-          onMouseMove={handleMouseMove}
         >
           {cards.map((card, index) => (
             <div
               key={index}
               className="w-[220px] flex-shrink-0 cursor-pointer"
             >
-              {/* Image Card */}
-              <div
-                className="
-                  w-full
-                  h-[240px]
-                  rounded-[20px]
-                  overflow-hidden
-                  bg-[#f5f5f5]
-                  shadow-[0_6px_18px_rgba(0,0,0,0.08)]
-                  transition-transform
-                  duration-300
-                  hover:scale-[1.02]
-                "
-              >
+              <div className="w-full h-[240px] rounded-[20px] overflow-hidden bg-[#f5f5f5] shadow-[0_6px_18px_rgba(0,0,0,0.08)] transition-transform duration-300 hover:scale-[1.02]">
                 <img
                   src={card.image}
                   alt={card.title}
@@ -102,7 +85,6 @@ export default function ConstructionContract() {
                 />
               </div>
 
-              {/* Text */}
               <h4 className="mt-[14px] font-medium text-[16px] text-[#2f2f2f]">
                 {card.title}
               </h4>
@@ -118,25 +100,22 @@ export default function ConstructionContract() {
           ))}
         </div>
 
-        {/* RIGHT ARROW */}
+        {/* ✅ RIGHT ARROW */}
         <button
           onClick={slideRight}
-          className="
-            absolute
-            -right-[40px]
-            top-[100px]
-            w-[44px]
-            h-[44px]
-            rounded-full
-            bg-white
-            shadow-[0_8px_20px_rgba(0,0,0,0.15)]
-            flex
-            items-center
-            justify-center
-            text-[20px]
-          "
+          className={`
+            absolute top-1/2 -translate-y-1/2 right-[-20px] z-20
+            w-10 h-10 rounded-full bg-white shadow-lg
+            flex items-center justify-center
+            transition-all duration-300
+            ${
+              showArrow
+                ? "opacity-100 scale-100"
+                : "opacity-0 scale-75 pointer-events-none"
+            }
+          `}
         >
-          →
+          ➜
         </button>
       </div>
     </section>

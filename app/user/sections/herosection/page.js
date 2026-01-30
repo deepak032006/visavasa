@@ -91,7 +91,7 @@ export default function HeroSection() {
         {/* RIGHT SIDE IMAGE COLLAGE */}
         <div className="relative w-[720px] h-[620px] grid grid-cols-2 grid-rows-[1fr_1fr_1fr] gap-4">
           <div className="overflow-hidden rounded-2xl group">
-            <img src="/images/slider.png" className="w-full h-full object-cover group-hover:scale-105 duration-500" />
+            <img src="/images/civil.png" className="w-full h-full object-cover group-hover:scale-105 duration-500" />
           </div>
 
           <div className="overflow-hidden rounded-2xl group row-span-2">

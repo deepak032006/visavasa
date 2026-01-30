@@ -12,7 +12,6 @@ import OurContractors from "./sections/contractor/page";
 import CleanEssentials from "./sections/clean/page";
 import ApplianceServiceRepair from "./sections/appliance/page";
 import HomeRepairInstallation from "./sections/homerepair/page";
-import TrustedBrands from "./sections/TrustedBrand/page";
 import PetAndFeeding from "./sections/petFeeding/page";
 import PetBreeds from "./sections/petbreeds/page";
 import Footer from "../components/footer/page";
@@ -154,7 +153,7 @@ export default function UserHome() {
             className="w-[693px] h-[387px] overflow-hidden"
           >
             <img
-              src="/images/mobile.png"
+              src="/images/banner1.png"
               alt="Hero Image"
               className="w-full h-full object-contain transition-transform duration-300 ease-in-out hover:scale-105"
             />
@@ -223,7 +222,7 @@ export default function UserHome() {
       <ApplianceServiceRepair />
       {/* Home Repair & installation  */}
       <HomeRepairInstallation />
-      <TrustedBrands />
+     
       {/* pet  */}
       <PetAndFeeding />
 
