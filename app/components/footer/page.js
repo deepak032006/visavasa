@@ -13,9 +13,9 @@ export default function Footer() {
         <div>
           <h4 className="font-semibold text-black mb-6">Company</h4>
           <ul className="space-y-3 text-sm">
-            <li><a href="/components/aboutus">About us</a></li>
-            <li><a href="/terms">Terms & conditions</a></li>
-            <li><a href="/privacy">Privacy policy</a></li>
+            <li><a href="components/footer/aboutus">About us</a></li>
+            <li><a href="components/footer/terms">Terms & conditions</a></li>
+            <li><a href="components/footer/policy">Anti Discrimination Policy</a></li>
            
           </ul>
         </div>
@@ -35,7 +35,7 @@ export default function Footer() {
         <div>
           <h4 className="font-semibold text-black mb-6">For Partners</h4>
           <ul className="space-y-3 text-sm">
-            <li><a href="/register-professional">Register as a professional</a></li>
+            <li><a href="components/footer/register">Register as a professional</a></li>
           </ul>
         </div>
 

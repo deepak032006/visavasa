@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function HeroSection() {
   const [openModal, setOpenModal] = useState(false);
@@ -29,9 +30,7 @@ export default function HeroSection() {
 
           {/* WHAT WE NEED CARD */}
           <div className="mt-2 border border-gray-300 rounded-[18px] p-6 w-[420px]">
-            <h3 className="text-[20px] font-semibold mb-6">
-              What We Need ?
-            </h3>
+            <h3 className="text-[20px] font-semibold mb-6">What We Need ?</h3>
 
             <div className="grid grid-cols-3 gap-y-6 gap-x-4 text-center">
               {needs.map((item, index) => (
@@ -41,10 +40,13 @@ export default function HeroSection() {
                       onClick={() => setOpenModal(true)}
                       className="flex flex-col items-center gap-2 group"
                     >
-                      <img
+                      <Image
                         src={item.icon}
                         alt={item.label}
-                        className="w-[44px] h-[44px] object-contain"
+                        width={44}
+                        height={44}
+                        className="object-contain"
+                        loading="lazy"
                       />
                       <p className="text-[12px] text-gray-600 group-hover:underline">
                         {item.label}
@@ -53,10 +55,13 @@ export default function HeroSection() {
                   ) : (
                     <Link href={item.link}>
                       <div className="flex flex-col items-center gap-2 group cursor-pointer">
-                        <img
+                        <Image
                           src={item.icon}
                           alt={item.label}
-                          className="w-[44px] h-[44px] object-contain"
+                          width={44}
+                          height={44}
+                          className="object-contain"
+                          loading="lazy"
                         />
                         <p className="text-[12px] text-gray-600 group-hover:underline">
                           {item.label}
@@ -90,20 +95,44 @@ export default function HeroSection() {
 
         {/* RIGHT SIDE IMAGE COLLAGE */}
         <div className="relative w-[720px] h-[620px] grid grid-cols-2 grid-rows-[1fr_1fr_1fr] gap-4">
-          <div className="overflow-hidden rounded-2xl group">
-            <img src="/images/civil.png" className="w-full h-full object-cover group-hover:scale-105 duration-500" />
+          <div className="relative overflow-hidden rounded-2xl group">
+            <Image
+              src="/images/home.png"
+              alt="Home"
+              fill
+              priority
+              className="object-cover group-hover:scale-105 duration-500"
+            />
           </div>
 
-          <div className="overflow-hidden rounded-2xl group row-span-2">
-            <img src="/images/home2.png" className="w-full h-full object-cover group-hover:scale-105 duration-500" />
+          <div className="relative overflow-hidden rounded-2xl group row-span-2">
+            <Image
+              src="/images/install1.png"
+              alt="Installation"
+              fill
+              priority
+              className="object-cover group-hover:scale-105 duration-500"
+            />
           </div>
 
-          <div className="overflow-hidden rounded-2xl group row-span-2">
-            <img src="/images/home3.png" className="w-full h-full object-cover group-hover:scale-105 duration-500" />
+          <div className="relative overflow-hidden rounded-2xl group row-span-2">
+            <Image
+              src="/images/cleaning.png"
+              alt="Cleaning"
+              fill
+              priority
+              className="object-cover group-hover:scale-105 duration-500"
+            />
           </div>
 
-          <div className="overflow-hidden rounded-2xl group col-start-2 row-start-3">
-            <img src="/images/home4.png" className="w-full h-full object-cover group-hover:scale-105 duration-500" />
+          <div className="relative overflow-hidden rounded-2xl group col-start-2 row-start-3">
+            <Image
+              src="/images/home4.png"
+              alt="Home Service"
+              fill
+              priority
+              className="object-cover group-hover:scale-105 duration-500"
+            />
           </div>
         </div>
       </section>
@@ -126,40 +155,35 @@ export default function HeroSection() {
             <h3 className="font-semibold mb-3">Repairs</h3>
             <div className="grid grid-cols-4 gap-4 mb-6">
               <Link href="/appliance-repair" className="flex flex-col items-center gap-2 group">
-                <img
+                <Image
                   src="/icon/electrician.png"
-                  alt="Appliance Repair"
-                  className="w-10 h-10 object-contain"
+                  alt="Electrician"
+                  width={40}
+                  height={40}
                 />
-                <span className="text-sm group-hover:underline">
-                  electrician
-                </span>
+                <span className="text-sm group-hover:underline">Electrician</span>
               </Link>
+
               <Link href="/appliance-repair" className="flex flex-col items-center gap-2 group">
-                <img
+                <Image
                   src="/icon/repair.png"
-                  alt="Appliance Repair"
-                  className="w-10 h-10 object-contain"
+                  alt="Plumber"
+                  width={40}
+                  height={40}
                 />
-                <span className="text-sm group-hover:underline">
-                  plumber
-                </span>
+                <span className="text-sm group-hover:underline">Plumber</span>
               </Link>
 
               <Link href="/carpenter" className="flex flex-col items-center gap-2 group">
-                <img
+                <Image
                   src="/icon/contractors.png"
                   alt="Carpenter"
-                  className="w-10 h-10 object-contain"
+                  width={40}
+                  height={40}
                 />
-                <span className="text-sm group-hover:underline">
-                  Carpenter
-                </span>
+                <span className="text-sm group-hover:underline">Carpenter</span>
               </Link>
             </div>
-
-
-
           </div>
         </div>
       )}

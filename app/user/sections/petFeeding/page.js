@@ -7,34 +7,42 @@ export default function PetAndFeeding() {
   const services = [
     {
       title: "Groomer",
-      image: "/images/pet.png",
+      image: "/images/feed.png",
+      link: "/user/services/contractor/petfeeding",
     },
     {
       title: "Host and sitter",
-      image: "/images/pet1.png",
+      image: "/images/feed2.png",
+      link: "/user/services/contractor/pet-feeding",
     },
     {
-      title: "Decor Installation",
-      image: "/images/pet2.png",
+      title: "Pet Decor Installation",
+      image: "/images/feed3.png",
+      link: "/user/services/contractor/pet-feeding",
     },
     {
       title: "Dog Walker",
-      image: "/images/pet3.png",
+      image: "/images/feed4.png",
+      link: "/user/services/contractor/pet-feeding",
     },
     {
-      title: "Jet spray installation",
-      image: "/images/pet4.png",
+      title: "Pet Spray Installation",
+      image: "/images/feed5.png",
+      link: "/user/services/contractor/pet-feeding",
     },
     {
-      title: "Decor Installation",
+      title: "Pet Care",
       image: "/images/pet.png",
+      link: "/user/services/contractor/pet-feeding",
     },
   ];
+
+
 
   const sliderRef = useRef(null);
   const [openModal, setOpenModal] = useState(false);
 
-  // 🔥 arrow logic
+  
   const [showArrow, setShowArrow] = useState(false);
   const hideTimeout = useRef(null);
 
@@ -76,7 +84,7 @@ export default function PetAndFeeding() {
             onClick={() => setOpenModal(false)}
           >
             <div
-              className="bg-white w-[600px] rounded-2xl p-8 relative"
+              className="bg-white w-[700px] rounded-2xl p-8 relative"
               onClick={(e) => e.stopPropagation()}
             >
               <button
@@ -87,22 +95,32 @@ export default function PetAndFeeding() {
               </button>
 
               <h2 className="text-2xl font-bold mb-6">
-                Construction Contract
+                Home Repair & Installation
               </h2>
 
-              <h3 className="font-semibold mb-3">Repairs</h3>
-              <div className="grid grid-cols-4 gap-4 mb-6">
-                <Link
-                  href="/appliance-repair"
-                  className="flex flex-col items-center gap-2 group"
-                >
-                  <img src="/icon/electrician.png" alt="electrician" />
-                  <span>electrician</span>
-                </Link>
+              <div className="grid grid-cols-3 gap-6">
+                {services.map((service, index) => (
+                  <Link
+                    key={index}
+                    href={service.link}
+                    onClick={() => setOpenModal(false)}
+                    className="flex flex-col items-center text-center hover:scale-105 transition"
+                  >
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      className="w-20 h-20 object-contain mb-3"
+                    />
+                    <span className="text-sm font-medium">
+                      {service.title}
+                    </span>
+                  </Link>
+                ))}
               </div>
             </div>
           </div>
         )}
+
       </div>
 
       {/* Slider */}
@@ -120,9 +138,10 @@ export default function PetAndFeeding() {
           "
         >
           {services.map((service, index) => (
-            <div
+            <Link
               key={index}
-              className="w-[220px] flex-shrink-0 cursor-pointer"
+              href={service.link}   // 👈 yahin href lagega
+              className="w-[220px] flex-shrink-0 cursor-pointer block"
             >
               <div className="w-full h-[240px] rounded-[20px] overflow-hidden bg-[#f5f5f5] shadow-[0_6px_18px_rgba(0,0,0,0.08)] transition-transform duration-300 hover:scale-[1.02]">
                 <img
@@ -143,8 +162,9 @@ export default function PetAndFeeding() {
               <p className="text-[14px] text-gray-800 font-medium mt-[2px]">
                 ₹898
               </p>
-            </div>
+            </Link>
           ))}
+
         </div>
 
         {/* RIGHT ARROW */}
@@ -155,10 +175,9 @@ export default function PetAndFeeding() {
             w-10 h-10 rounded-full bg-white shadow-lg
             flex items-center justify-center
             transition-all duration-300
-            ${
-              showArrow
-                ? "opacity-100 scale-100"
-                : "opacity-0 scale-75 pointer-events-none"
+            ${showArrow
+              ? "opacity-100 scale-100"
+              : "opacity-0 scale-75 pointer-events-none"
             }
           `}
         >

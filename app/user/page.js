@@ -8,7 +8,7 @@ import SpotlightSection from "./sections/spotlight/page";
 import ConstructionContract from "./sections/ourcontraction/page";
 import NewAndNoteworthy from "./sections/new/page";
 import PopularServices from "./sections/popular/page";
-import OurContractors from "./sections/contractor/page";
+import OurContractors from "./sections/contrator/page";
 import CleanEssentials from "./sections/clean/page";
 import ApplianceServiceRepair from "./sections/appliance/page";
 import HomeRepairInstallation from "./sections/homerepair/page";
@@ -150,7 +150,7 @@ export default function UserHome() {
             className="w-[693px] h-[387px] overflow-hidden"
           >
             <img
-              src="/images/banner1.png"
+              src="/images/mobile.png"
               alt="Hero Image"
               className="w-full h-full object-contain transition-transform duration-300 ease-in-out hover:scale-105"
             />
@@ -260,7 +260,7 @@ export default function UserHome() {
 
 
       <section className="w-full py-12">
-        <div className="mx-auto max-w-[1300px] bg-[#90CAF9] rounded-sm">
+        <div className="mx-auto max-w-[1300px] bg-[#C17331] rounded-sm">
           <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-12 px-12 py-10">
 
             {/* Left Content */}

@@ -1,25 +1,23 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function NewAndNoteworthy() {
-  const router = useRouter();
-
   const items = [
-    { title: "Carpenter", image: "/images/carpenter.png" },
-    { title: "Electrician", image: "/images/electrician2.png" },
-    { title: "Gardner", image: "/images/gardner.png" },
-    { title: "Painter", image: "/images/painter1.png" },
-    { title: "Construction", image: "/images/construction.png" },
-    { title: "Gardner", image: "/images/gardner.png" },
+    { title: "Electrician Contractor", image: "/images/electrician1.png", link: "/user/services/contractor/electrician" },
+    { title: "AC repair", image: "/images/ac.png", link: "/user/services/contractor/ac-repair" },
+    { title: "Tap Repair", image: "/images/plumber1.png", link: "/user/services/contractor/plumber" },
+    { title: "Painter", image: "/images/painter1.png", link: "/user/services/contractor/painter" },
+    { title: "Bathrooms & Kitchen cleaning", image: "/images/install.png", link: "/user/services/cleaning" },
+    { title: "Gardner", image: "/images/gardner.png", link: "/user/services/contractor/gardner" },
   ];
 
   const sliderRef = useRef(null);
   const [openModal, setOpenModal] = useState(false);
 
-  // 🔥 arrow logic
+  // arrow logic
   const [showArrow, setShowArrow] = useState(false);
   const hideTimeout = useRef(null);
 
@@ -29,7 +27,6 @@ export default function NewAndNoteworthy() {
 
   const handleScroll = () => {
     setShowArrow(true);
-
     clearTimeout(hideTimeout.current);
     hideTimeout.current = setTimeout(() => {
       setShowArrow(false);
@@ -45,48 +42,68 @@ export default function NewAndNoteworthy() {
 
         <button
           type="button"
-          onClick={(e) => {
-            e.stopPropagation();
-            setOpenModal(true);
-          }}
+          onClick={() => setOpenModal(true)}
           className="text-[14px] text-blue-600 border border-blue-600 rounded-full px-[14px] py-[4px]"
         >
           See all
         </button>
 
-        {openModal && (
+        {/* MODAL */}
+        {/* MODAL */}
+        <div
+          className={`
+    fixed inset-0 z-50 flex justify-center items-center
+    bg-black/50 transition-opacity duration-300
+    ${openModal ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}
+  `}
+          onClick={() => setOpenModal(false)}
+        >
           <div
-            className="fixed inset-0 bg-black/50 flex justify-center items-center z-50"
-            onClick={() => setOpenModal(false)}
+            onClick={(e) => e.stopPropagation()}
+            className={`
+      bg-white w-[600px] rounded-2xl p-8 relative
+      transform transition-all duration-300
+      ${openModal ? "scale-100 opacity-100" : "scale-90 opacity-0"}
+    `}
           >
-            <div
-              className="bg-white w-[600px] rounded-2xl p-8 relative"
-              onClick={(e) => e.stopPropagation()}
+            <button
+              onClick={() => setOpenModal(false)}
+              className="absolute top-4 right-4 text-xl"
             >
-              <button
-                onClick={() => setOpenModal(false)}
-                className="absolute top-4 right-4 text-xl"
-              >
-                ✕
-              </button>
+              ✕
+            </button>
 
-              <h2 className="text-2xl font-bold mb-6">
-                Construction Contract
-              </h2>
+            <h2 className="text-2xl font-bold mb-6">
+              New And Noteworthy
+            </h2>
 
-              <h3 className="font-semibold mb-3">Repairs</h3>
-              <div className="grid grid-cols-4 gap-4 mb-6">
+            <h3 className="font-semibold mb-3">Services</h3>
+
+            <div className="grid grid-cols-4 gap-4">
+              {items.map((item, i) => (
                 <Link
-                  href="/appliance-repair"
+                  key={i}
+                  href={item.link}
                   className="flex flex-col items-center gap-2 group"
+                  onClick={() => setOpenModal(false)}
                 >
-                  <img src="/icon/electrician.png" alt="electrician" />
-                  <span>electrician</span>
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    width={48}
+                    height={48}
+                    className="object-contain"
+                  />
+                  <span className="text-sm text-center group-hover:underline">
+                    {item.title}
+                  </span>
                 </Link>
-              </div>
+              ))}
             </div>
           </div>
-        )}
+        </div>
+
+
       </div>
 
       {/* Slider */}
@@ -97,16 +114,16 @@ export default function NewAndNoteworthy() {
           className="flex gap-x-[24px] overflow-x-scroll scrollbar-hide cursor-grab active:cursor-grabbing"
         >
           {items.map((item, index) => (
-            <div
+            <Link
               key={index}
-              onClick={() => router.push("/user/cardpages")}
-              className="w-[220px] flex-shrink-0 cursor-pointer"
+              href={item.link}
+              className="w-[220px] flex-shrink-0 cursor-pointer block"
             >
               <div className="w-full h-[240px] rounded-[20px] overflow-hidden bg-[#f5f5f5] shadow-[0_6px_18px_rgba(0,0,0,0.08)] transition-transform duration-300 hover:scale-[1.02]">
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover loading='lazy'"
                 />
               </div>
 
@@ -121,7 +138,7 @@ export default function NewAndNoteworthy() {
               <p className="text-[14px] text-gray-800 font-medium mt-[2px]">
                 ₹898
               </p>
-            </div>
+            </Link>
           ))}
         </div>
 
@@ -133,10 +150,9 @@ export default function NewAndNoteworthy() {
             w-10 h-10 rounded-full bg-white shadow-lg
             flex items-center justify-center
             transition-all duration-300
-            ${
-              showArrow
-                ? "opacity-100 scale-100"
-                : "opacity-0 scale-75 pointer-events-none"
+            ${showArrow
+              ? "opacity-100 scale-100"
+              : "opacity-0 scale-75 pointer-events-none"
             }
           `}
         >

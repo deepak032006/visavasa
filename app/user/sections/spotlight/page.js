@@ -2,14 +2,15 @@
 
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function SpotlightSection() {
   const router = useRouter();
 
   const images = [
-    "/images/spolight2.png",
-    "/images/spolight1.png",
-    "/images/spolight.png",
+    "/images/home.png",
+    "/images/slider1.png",
+    "/images/painting.png",
     "/images/slider1.png",
   ];
 
@@ -48,7 +49,7 @@ export default function SpotlightSection() {
 
   // IMAGE CLICK
   const handleRedirect = () => {
-    router.push("/user/spotlight"); // 🔁 change if needed
+    router.push("/user/spotlight");
   };
 
   return (
@@ -77,6 +78,7 @@ export default function SpotlightSection() {
               key={index}
               onClick={handleRedirect}
               className="
+                relative
                 min-w-[400px]
                 h-[250px]
                 rounded-[16px]
@@ -85,16 +87,17 @@ export default function SpotlightSection() {
                 cursor-pointer
               "
             >
-              <img
+              <Image
                 src={img}
                 alt={`Spotlight ${index + 1}`}
-                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                fill
+                loading="lazy"
+                className="object-cover transition-transform duration-300 group-hover:scale-105"
               />
             </div>
           ))}
         </div>
 
-        {/* LEFT */}
        
       </div>
     </section>

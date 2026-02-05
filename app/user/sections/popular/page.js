@@ -2,39 +2,45 @@
 
 import { useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function PopularServices() {
   const services = [
     {
       title: "Intense Bathroom Cleaning (2 Bathrooms)",
-      image: "/images/cleaning.png",
+      image: "/images/repair.png",
+      link: "/user/services/contractor/cleaning",
     },
     {
       title: "Drilling & hang (wall decor)",
       image: "/images/install.png",
+      link: "/user/services/contractor/carpenter",
     },
     {
       title: "Tap repair",
       image: "/images/tap.png",
+      link: "/user/services/contractor/plumber",
     },
     {
       title: "Classic cleaning (2 Bathrooms)",
       image: "/images/clean.png",
+      link: "/user/services/contractor/cleaning",
     },
     {
       title: "Geyser check-up",
       image: "/images/geyser.png",
+      link: "/user/services/contractor/electrician",
     },
     {
       title: "Drilling & hang (wall decor)",
       image: "/images/drill.png",
+      link: "/user/services/contractor/carpenter",
     },
   ];
 
   const sliderRef = useRef(null);
   const [openModal, setOpenModal] = useState(false);
 
-  // 🔥 arrow logic
   const [showArrow, setShowArrow] = useState(false);
   const hideTimeout = useRef(null);
 
@@ -45,7 +51,6 @@ export default function PopularServices() {
   const handleScroll = () => {
     setShowArrow(true);
     clearTimeout(hideTimeout.current);
-
     hideTimeout.current = setTimeout(() => {
       setShowArrow(false);
     }, 1000);
@@ -61,74 +66,78 @@ export default function PopularServices() {
 
         <button
           type="button"
-          onClick={(e) => {
-            e.stopPropagation();
-            setOpenModal(true);
-          }}
+          onClick={() => setOpenModal(true)}
           className="text-[14px] text-blue-600 border border-blue-600 rounded-full px-[14px] py-[4px]"
         >
           See all
         </button>
-
-        {openModal && (
-          <div
-            className="fixed inset-0 bg-black/50 flex justify-center items-center z-50"
-            onClick={() => setOpenModal(false)}
-          >
-            <div
-              className="bg-white w-[600px] rounded-2xl p-8 relative"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                onClick={() => setOpenModal(false)}
-                className="absolute top-4 right-4 text-xl"
-              >
-                ✕
-              </button>
-
-              <h2 className="text-2xl font-bold mb-6">
-                Construction Contract
-              </h2>
-
-              <h3 className="font-semibold mb-3">Repairs</h3>
-              <div className="grid grid-cols-4 gap-4 mb-6">
-                <Link
-                  href="/appliance-repair"
-                  className="flex flex-col items-center gap-2 group"
-                >
-                  <img src="/icon/electrician.png" alt="electrician" />
-                  <span>electrician</span>
-                </Link>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
+
+      {/* MODAL */}
+      {openModal && (
+  <div
+    className="fixed inset-0 bg-black/50 flex justify-center items-center z-50"
+    onClick={() => setOpenModal(false)}
+  >
+    <div
+      className="bg-white w-[700px] rounded-2xl p-8 relative"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <button
+        onClick={() => setOpenModal(false)}
+        className="absolute top-4 right-4 text-xl"
+      >
+        ✕
+      </button>
+
+      <h2 className="text-2xl font-bold mb-6">
+        Popular Services
+      </h2>
+
+      <div className="grid grid-cols-3 gap-6">
+        {services.map((service, index) => (
+          <Link
+            key={index}
+            href={service.link}
+            onClick={() => setOpenModal(false)}
+            className="flex flex-col items-center text-center hover:scale-105 transition"
+          >
+            <Image
+              src={service.image}
+              alt={service.title}
+              width={80}
+              height={80}
+              loading="lazy"
+              className="object-contain mb-3"
+            />
+            <span className="text-sm font-medium">
+              {service.title}
+            </span>
+          </Link>
+        ))}
+      </div>
+    </div>
+  </div>
+)}
 
       {/* Cards Slider */}
       <div className="relative">
         <div
           ref={sliderRef}
           onScroll={handleScroll}
-          className="
-            flex
-            gap-x-[24px]
-            overflow-x-scroll
-            scrollbar-hide
-            cursor-grab
-            active:cursor-grabbing
-          "
+          className="flex gap-x-[24px] overflow-x-scroll scrollbar-hide cursor-grab active:cursor-grabbing"
         >
           {services.map((service, index) => (
-            <div
+            <Link
               key={index}
-              className="w-[240px] flex-shrink-0 cursor-pointer"
+              href={service.link}
+              className="w-[240px] flex-shrink-0 cursor-pointer block"
             >
               <div className="w-full h-[260px] rounded-[20px] overflow-hidden bg-[#f5f5f5] shadow-[0_6px_18px_rgba(0,0,0,0.08)] transition-transform duration-300 hover:scale-[1.02]">
                 <img
                   src={service.image}
                   alt={service.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover loading='lazy'"
                 />
               </div>
 
@@ -143,7 +152,7 @@ export default function PopularServices() {
               <p className="text-[14px] text-gray-800 font-medium mt-[2px]">
                 ₹898
               </p>
-            </div>
+            </Link>
           ))}
         </div>
 

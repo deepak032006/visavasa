@@ -1,36 +1,45 @@
 "use client";
 
 import { useRef, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
 
 export default function ApplianceServiceRepair() {
   const services = [
     {
       title: "Auto Top load machine check-up",
       image: "/images/washing.png",
+      link: "/user/services/contractor/electrician",
     },
     {
       title: "AC Uninstallation",
       image: "/images/ac.png",
+      link: "/user/services/contractor/ac-repair",
     },
     {
       title: "TV check-up",
       image: "/images/tv.png",
+      link: "/user/services/contractor/electrician",
     },
     {
       title: "Solar panel uninstallation",
       image: "/images/drill.png",
+      link: "/user/services/contractor/electrician",
     },
     {
       title: "Semi-automatic check-up",
-      image: "/images/same.png",
+      image: "/images/washing.png",
+      link: "/user/services/contractor/electrician",
     },
     {
       title: "Solar panel uninstallation",
-      image: "/images/install.png",
+      image: "/images/solar.png",
+      link: "/user/services/contractor/electrician",
     },
   ];
 
   const sliderRef = useRef(null);
+  const [openModal, setOpenModal] = useState(false);
   const [showArrow, setShowArrow] = useState(false);
   const hideTimeout = useRef(null);
 
@@ -41,7 +50,6 @@ export default function ApplianceServiceRepair() {
   const handleScroll = () => {
     setShowArrow(true);
     clearTimeout(hideTimeout.current);
-
     hideTimeout.current = setTimeout(() => {
       setShowArrow(false);
     }, 1000);
@@ -50,39 +58,87 @@ export default function ApplianceServiceRepair() {
   return (
     <section className="mt-[100px] px-[100px]">
       {/* Header */}
-      <div className="flex justify-between items-center mb-[40px]">
+      <div className="flex justify-between items-start mb-[40px]">
         <h2 className="text-[38px] font-semibold text-[#2f2f2f]">
           Appliance Service & Repair
         </h2>
 
-        <button className="text-[14px] text-blue-600 border border-blue-600 rounded-full px-[14px] py-[4px]">
+        <button
+          type="button"
+          onClick={() => setOpenModal(true)}
+          className="text-[14px] text-blue-600 border border-blue-600 rounded-full px-[14px] py-[4px]"
+        >
           See all
         </button>
       </div>
+
+      {/* MODAL */}
+      {openModal && (
+        <div
+          className="fixed inset-0 bg-black/50 flex justify-center items-center z-50"
+          onClick={() => setOpenModal(false)}
+        >
+          <div
+            className="bg-white w-[700px] rounded-2xl p-8 relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setOpenModal(false)}
+              className="absolute top-4 right-4 text-xl"
+            >
+              ✕
+            </button>
+
+            <h2 className="text-2xl font-bold mb-6">
+              Appliance Service & Repair
+            </h2>
+
+            <div className="grid grid-cols-3 gap-6">
+              {services.map((service, index) => (
+                <Link
+                  key={index}
+                  href={service.link}
+                  onClick={() => setOpenModal(false)}
+                  className="flex flex-col items-center text-center hover:scale-105 transition"
+                >
+                  <Image
+                    src={service.image}
+                    alt={service.title}
+                    width={80}
+                    height={80}
+                    loading="lazy"
+                    className="object-contain mb-3"
+                  />
+                  <span className="text-sm font-medium">
+                    {service.title}
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Slider */}
       <div className="relative">
         <div
           ref={sliderRef}
           onScroll={handleScroll}
-          className="
-            flex
-            gap-x-[24px]
-            overflow-x-scroll
-            scrollbar-hide
-            cursor-grab
-            active:cursor-grabbing
-          "
+          className="flex gap-x-[24px] overflow-x-scroll scrollbar-hide cursor-grab active:cursor-grabbing"
         >
           {services.map((service, index) => (
-            <div
+            <Link
               key={index}
-              className="w-[220px] flex-shrink-0 cursor-pointer"
+              href={service.link}
+              className="w-[220px] flex-shrink-0 cursor-pointer block"
             >
               <div className="w-full h-[240px] rounded-[20px] overflow-hidden bg-[#f5f5f5] shadow-[0_6px_18px_rgba(0,0,0,0.08)] transition-transform duration-300 hover:scale-[1.02]">
-                <img
+                <Image
                   src={service.image}
                   alt={service.title}
+                  width={220}
+                  height={240}
+                  loading="lazy"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -98,7 +154,7 @@ export default function ApplianceServiceRepair() {
               <p className="text-[14px] text-gray-800 font-medium mt-[2px]">
                 ₹898
               </p>
-            </div>
+            </Link>
           ))}
         </div>
 

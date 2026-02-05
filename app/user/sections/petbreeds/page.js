@@ -4,14 +4,16 @@ import { useRef, useState } from "react";
 import Link from "next/link";
 
 export default function PetBreeds() {
-  const breeds = [
-    { title: "Labrador", image: "/images/pet1.png" },
-    { title: "Retrievers", image: "/images/pet3.png" },
-    { title: "German Shepherds", image: "/images/pet.png" },
-    { title: "Golden Retrievers", image: "/images/pet4.png" },
-    { title: "Pugs", image: "/images/pet1.png" },
-    { title: "German Shepherds", image: "/images/spolight.png" },
-  ];
+ const breeds = [
+  { title: "Labrador", image: "/images/pet1.png", link: "/user/services/contractor/pet-breeds" },
+  { title: "Retrievers", image: "/images/pet3.png", link: "/user/services/contractor/pet-breeds" },
+  { title: "German Shepherds", image: "/images/pet.png", link: "/user/services/contractor/pet-breeds" },
+  { title: "Golden Retrievers", image: "/images/pet4.png", link: "/user/services/contractor/pet-breeds" },
+  { title: "Pugs", image: "/images/pet1.png", link: "/user/services/contractor/pet-breeds" },
+  { title: "German Shepherds", image: "/images/spolight.png", link: "/user/services/contractor/pet-breeds" },
+];
+
+
 
   const sliderRef = useRef(null);
   const [openModal, setOpenModal] = useState(false);
@@ -53,38 +55,48 @@ export default function PetBreeds() {
         </button>
 
         {openModal && (
-          <div
-            className="fixed inset-0 bg-black/50 flex justify-center items-center z-50"
+  <div
+    className="fixed inset-0 bg-black/50 flex justify-center items-center z-50"
+    onClick={() => setOpenModal(false)}
+  >
+    <div
+      className="bg-white w-[700px] rounded-2xl p-8 relative"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <button
+        onClick={() => setOpenModal(false)}
+        className="absolute top-4 right-4 text-xl"
+      >
+        ✕
+      </button>
+
+      <h2 className="text-2xl font-bold mb-6">
+        Pet Breeds
+      </h2>
+
+      <div className="grid grid-cols-3 gap-6">
+        {breeds.map((breed, index) => (
+          <Link
+            key={index}
+            href={breed.link}
             onClick={() => setOpenModal(false)}
+            className="flex flex-col items-center text-center hover:scale-105 transition"
           >
-            <div
-              className="bg-white w-[600px] rounded-2xl p-8 relative"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                onClick={() => setOpenModal(false)}
-                className="absolute top-4 right-4 text-xl"
-              >
-                ✕
-              </button>
+            <img
+              src={breed.image}
+              alt={breed.title}
+              className="w-20 h-20 object-contain mb-3"
+            />
+            <span className="text-sm font-medium">
+              {breed.title}
+            </span>
+          </Link>
+        ))}
+      </div>
+    </div>
+  </div>
+)}
 
-              <h2 className="text-2xl font-bold mb-6">
-                Construction Contract
-              </h2>
-
-              <h3 className="font-semibold mb-3">Repairs</h3>
-              <div className="grid grid-cols-4 gap-4 mb-6">
-                <Link
-                  href="/appliance-repair"
-                  className="flex flex-col items-center gap-2 group"
-                >
-                  <img src="/icon/electrician.png" alt="electrician" />
-                  <span>electrician</span>
-                </Link>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
 
       {/* Slider */}
@@ -102,9 +114,10 @@ export default function PetBreeds() {
           "
         >
           {breeds.map((breed, index) => (
-            <div
+            <Link
               key={index}
-              className="w-[220px] flex-shrink-0 cursor-pointer"
+              href={breed.link}   // 👈 yahin link lagta hai
+              className="w-[220px] flex-shrink-0 cursor-pointer block"
             >
               <div className="w-full h-[240px] rounded-[20px] overflow-hidden bg-[#f5f5f5] shadow-[0_6px_18px_rgba(0,0,0,0.08)] transition-transform duration-300 hover:scale-[1.02]">
                 <img
@@ -125,8 +138,9 @@ export default function PetBreeds() {
               <p className="text-[14px] text-gray-800 font-medium mt-[2px]">
                 ₹25,000
               </p>
-            </div>
+            </Link>
           ))}
+
         </div>
 
         {/* RIGHT ARROW */}
@@ -137,10 +151,9 @@ export default function PetBreeds() {
             w-10 h-10 rounded-full bg-white shadow-lg
             flex items-center justify-center
             transition-all duration-300
-            ${
-              showArrow
-                ? "opacity-100 scale-100"
-                : "opacity-0 scale-75 pointer-events-none"
+            ${showArrow
+              ? "opacity-100 scale-100"
+              : "opacity-0 scale-75 pointer-events-none"
             }
           `}
         >
